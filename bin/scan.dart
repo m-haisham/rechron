@@ -7,7 +7,7 @@ void main(List<String> args) {
   final scanner = Scanner(content);
   while (true) {
     final token = scanner.scanToken();
-    if (token.type == TokenType.eof) {
+    if (token.type == TokenType.EOF) {
       break;
     }
 

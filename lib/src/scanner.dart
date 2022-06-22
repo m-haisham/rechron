@@ -16,13 +16,13 @@ class Scanner {
     skipWhitespace();
     start = current;
 
-    if (isAtEnd) return makeToken(TokenType.eof);
+    if (isAtEnd) return makeToken(TokenType.EOF);
 
     final c = advance();
 
     switch (c) {
       case ",":
-        return makeToken(TokenType.comma);
+        return makeToken(TokenType.COMMA);
       default:
         if (isDigit(c)) {
           return number();
@@ -52,7 +52,7 @@ class Scanner {
   }
 
   Token errorToken(String value) {
-    return Token(TokenType.error, value, line);
+    return Token(TokenType.ERROR, value, line);
   }
 
   void skipWhitespace() {
@@ -115,6 +115,12 @@ class Scanner {
       advance();
     }
 
+    final value = characters.sublist(start, current).join();
+    final keyword = keywords[value];
+    if (keyword != null) {
+      return makeToken(keyword);
+    }
+
     return makeToken(TokenType.identifier);
   }
 
@@ -132,6 +138,6 @@ class Scanner {
       }
     }
 
-    return makeToken(TokenType.number);
+    return makeToken(TokenType.NUMBER);
   }
 }

@@ -1,6 +1,8 @@
+// ignore_for_file: constant_identifier_names
+
 class Token {
   const Token(this.type, this.value, this.line);
-  const Token.empty() : this(TokenType.error, "", 0);
+  const Token.empty() : this(TokenType.ERROR, "", 0);
 
   final int line;
   final TokenType type;
@@ -14,12 +16,57 @@ class Token {
 
 enum TokenType {
   // Single-character tokens.
-  comma,
+  COMMA,
+
+  // Keywords.
+  YESTERDAY,
+  TODAY,
+  TOMORROW,
+
+  DECADE, // Timeframe.
+  YEAR,
+  MONTH,
+  WEEK,
+  DAY,
+  HOUR,
+  MINUTE,
+  SECOND,
+  MOMENT,
+
+  AGO, // Relative.
+  IN,
+
+  AND,
 
   // Literals.
-  number,
-  identifier,
+  NUMBER,
+  identifier, // TODO: to be removed
 
-  error,
-  eof,
+  ERROR,
+  EOF,
 }
+
+const keywords = <String, TokenType>{
+  // Adjacent.
+  'yesterday': TokenType.YESTERDAY,
+  'today': TokenType.TODAY,
+  'tomorrow': TokenType.TOMORROW,
+
+  // Timeframes.
+  'decade': TokenType.DECADE,
+  'year': TokenType.YEAR,
+  'month': TokenType.MONTH,
+  'week': TokenType.WEEK,
+  'day': TokenType.DAY,
+  'hour': TokenType.HOUR,
+  'minute': TokenType.MINUTE,
+  'second': TokenType.SECOND,
+  'moment': TokenType.MOMENT,
+
+  // Relative.
+  'ago': TokenType.AGO,
+  'in': TokenType.IN,
+
+  // Other.
+  'and': TokenType.AND,
+};
