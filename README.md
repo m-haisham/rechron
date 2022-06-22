@@ -2,6 +2,19 @@
 
 Dart library for parsing relative date and time.
 
+## Examples
+
+- just now
+- a moment ago
+- tomorrow
+- today
+- yesterday
+- 10 days remaining
+- 2 hours ago
+- 2 months ago
+- 3 hours, 1 minute, and 2 seconds ago
+<!-- TODO: In 3 minutes -->
+
 ## License
 
 ```text

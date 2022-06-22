@@ -22,6 +22,16 @@ abstract class Value {
 
     throw TypeError();
   }
+
+  Value operator +(Value other) {
+    if (this is DurationValue && other is DurationValue) {
+      final current = this as DurationValue;
+      final value = current.value + other.value;
+      return Value.duration(value);
+    }
+
+    throw TypeError();
+  }
 }
 
 class NumberValue extends Value {

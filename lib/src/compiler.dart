@@ -121,7 +121,23 @@ class Parser {
 
   void exact() {
     duration();
-    // TODO: if (match(TokenType.comma)) {}
+    if (match(TokenType.comma)) {
+      bool hitAnd = false;
+      do {
+        if (matchValue('and')) {
+          hitAnd = true;
+          break;
+        }
+
+        duration();
+        emitByte(OpCode.ADD.index);
+      } while (match(TokenType.comma));
+
+      if (hitAnd || matchValue('and')) {
+        duration();
+        emitByte(OpCode.ADD.index);
+      }
+    }
 
     direction();
   }
@@ -147,6 +163,8 @@ class Parser {
       emitByte(OpCode.DURATION_MINUTES.index);
     } else if (matchValue('hour') || matchValue('hours')) {
       emitByte(OpCode.DURATION_HOURS.index);
+    } else if (matchValue('day') || matchValue('days')) {
+      emitByte(OpCode.DURATION_DAYS.index);
     } else if (matchValue('week') || matchValue('weeks')) {
       emitConstant(Value.number(7));
       emitByte(OpCode.MULTIPLY.index);

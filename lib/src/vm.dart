@@ -65,6 +65,7 @@ class VM {
           pop();
           push(Value.duration(Duration()));
           break;
+
         case OpCode.DIRECTION_AGO:
           final duration = pop() as DurationValue;
           final dateTime = DateTime.now().subtract(duration.value);
@@ -81,12 +82,14 @@ class VM {
           push(constant);
           break;
 
+        case OpCode.ADD:
+          final a = pop();
+          final b = pop();
+          push(a + b);
+          break;
         case OpCode.MULTIPLY:
           final a = pop();
           final b = pop();
-          if (a.runtimeType != b.runtimeType) {
-            return InterpretResult.runtimeError;
-          }
           push(a * b);
           break;
 

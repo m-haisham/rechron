@@ -38,6 +38,8 @@ int disassembleIntruction(Chunk chunk, int offset) {
     case OpCode.CONSTANT:
       return constantInstruction('OP_CONSTANT', chunk, offset);
 
+    case OpCode.ADD:
+      return simpleInstruction('OP_ADD', offset);
     case OpCode.MULTIPLY:
       return simpleInstruction('OP_MULTIPLY', offset);
 

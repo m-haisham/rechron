@@ -17,6 +17,7 @@ enum OpCode {
 
   CONSTANT,
 
+  ADD,
   MULTIPLY,
 
   RETURN;
