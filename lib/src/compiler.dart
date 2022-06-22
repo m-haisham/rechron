@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dateparser/src/debug.dart';
 import 'package:dateparser/src/token.dart';
+import 'package:dateparser/src/utils.dart';
 import 'package:dateparser/src/value.dart';
 
 import 'chunk.dart';
@@ -155,6 +156,16 @@ class Parser {
     } else if (match(TokenType.MONTH)) {
       // TODO: add days depending on calender month
       emitConstant(Value.number(30.437)); // Average days per month.
+      emitByte(OpCode.MULTIPLY.index);
+      emitByte(OpCode.DURATION_DAYS.index);
+    } else if (match(TokenType.YEAR)) {
+      // TODO: account for leap year.
+      emitConstant(Value.number(365.25)); // Average days per year.
+      emitByte(OpCode.MULTIPLY.index);
+      emitByte(OpCode.DURATION_DAYS.index);
+    } else if (match(TokenType.DECADE)) {
+      final dayCount = (8.0 * 365.0) + (2.0 * 366.0);
+      emitConstant(Value.number(dayCount));
       emitByte(OpCode.MULTIPLY.index);
       emitByte(OpCode.DURATION_DAYS.index);
     } else {
