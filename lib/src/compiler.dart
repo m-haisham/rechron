@@ -114,12 +114,24 @@ class Parser {
       emitByte(OpCode.DURATION_DAYS.index);
       emitByte(OpCode.DIRECTION_REMAINING.index);
       emitByte(OpCode.INTO_DATE.index);
+    } else if (matchValue('in')) {
+      inExact();
     } else {
       exact();
     }
   }
 
+  void inExact() {
+    durationChain();
+    emitByte(OpCode.DIRECTION_REMAINING.index);
+  }
+
   void exact() {
+    durationChain();
+    direction();
+  }
+
+  void durationChain() {
     duration();
     if (match(TokenType.comma)) {
       bool hitAnd = false;
@@ -138,8 +150,6 @@ class Parser {
         emitByte(OpCode.ADD.index);
       }
     }
-
-    direction();
   }
 
   void duration() {

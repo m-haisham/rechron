@@ -3,9 +3,12 @@ relative         => "just" "now"
                     | relativeday
 
 relativeday      => "yesterday" | "today" | "tomorrow"
+                    | in_exact
                     | exact
 
-exact            => duration (("," duration)+ "and" duration )? direction
+in_exact         => "in" duration_chain
+exact            => duration_chain direction
+duration_chain   => duration (("," duration)+ "and" duration )?
 duration         => (NUMBER | "a" | "an") timeframe
 timeframe        => month
                     | week
