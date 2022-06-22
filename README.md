@@ -13,7 +13,7 @@ Dart library for parsing relative date and time.
 - 2 hours ago
 - 2 months ago
 - 3 hours, 1 minute, and 2 seconds ago
-<!-- TODO: In 3 minutes -->
+- in 3 minutes
 
 ## License
 
