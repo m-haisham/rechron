@@ -1,0 +1,26 @@
+expression       => relative
+relative         => "just" "now"
+                    | relativeday
+
+relativeday      => "yesterday" | "today" | "tomorrow"
+                    | exact
+
+exact            => duration (("," duration)+ "and" duration )? direction
+duration         => (NUMBER | "a" | "an") timeframe
+timeframe        => month
+                    | week
+                    | day
+                    | hour
+                    | minute
+                    | second
+                    | moment
+
+direction        => "ago" | "remaining"
+
+month            => "month" | "months"
+week             => "week" | "weeks"
+day              => "day" | "days"
+hour             => "hour" | "hours"
+minute           => "minute" | "minutes"
+second           => "second" | "seconds"
+moment           => "moment"
