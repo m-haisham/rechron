@@ -164,6 +164,7 @@ class Parser {
       emitByte(OpCode.MULTIPLY.index);
       emitByte(OpCode.DURATION_DAYS.index);
     } else if (match(TokenType.DECADE)) {
+      // TODO: account for leap year.
       final dayCount = (8.0 * 365.0) + (2.0 * 366.0);
       emitConstant(Value.number(dayCount));
       emitByte(OpCode.MULTIPLY.index);
