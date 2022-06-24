@@ -2,6 +2,7 @@ import 'package:dateparser/generated/generated.dart' as generated;
 import 'package:dateparser/src/token.dart';
 import 'package:dateparser/src/utils.dart';
 
+// TODO: optimize
 class TranslationData {
   TranslationData(String locale)
       : info = generated.data[locale]!['translation']!,
@@ -12,6 +13,7 @@ class TranslationData {
 
   String preprocess(String source) {
     source = simplify(source);
+    source = relative(source);
     return source;
   }
 
@@ -41,6 +43,31 @@ class TranslationData {
       for (final map in others['simplifications-regex']!)
         for (final entry in map.entries) entry.key: entry.value
     };
+  }
+
+  String relative(String source) {
+    for (final entry in relativeTypeData.entries) {
+      source = source.replaceAll(entry.key, entry.value);
+    }
+
+    return source;
+  }
+
+  Map<String, String> get relativeTypeData {
+    final data = <String, String>{};
+    for (final entry in info['relative-type'].entries) {
+      for (final value in entry.value) {
+        data[value] = entry.key;
+      }
+    }
+
+    for (final entry in others['relative-type'].entries) {
+      for (final value in entry.value) {
+        data[value] = entry.key;
+      }
+    }
+
+    return data;
   }
 
   Map<String, TokenType>? _tokenMapCache;
