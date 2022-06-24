@@ -46,7 +46,10 @@ class TranslationData {
   }
 
   String relative(String source) {
-    for (final entry in relativeTypeData.entries) {
+    for (final entry in relativeTypeData.entries.toList()
+      ..sort(
+        (a, b) => a.key.compareTo(b.key),
+      )) {
       source = source.replaceAll(entry.key, entry.value);
     }
 
