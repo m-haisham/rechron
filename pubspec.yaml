@@ -9,6 +9,7 @@ environment:
 dependencies: 
   characters: ^1.2.1
   yaml: ^3.1.1
+  benchmark_harness: ^2.1.0
 
 dev_dependencies:
   lints: ^2.0.0
