@@ -1,11 +1,14 @@
 import 'package:characters/characters.dart';
+import 'package:dateparser/src/data/translation_data.dart';
 
 import 'token.dart';
 
 class Scanner {
-  Scanner(String content) : characters = content.characters.toList();
+  Scanner(String content, {required this.data})
+      : characters = content.characters.toList();
 
   final List<String> characters;
+  final TranslationData data;
 
   int start = 0;
   int current = 0;
@@ -116,7 +119,7 @@ class Scanner {
     }
 
     final value = characters.sublist(start, current).join();
-    final keyword = keywords[value];
+    final keyword = keywords[value] ?? data.tokenMap[value];
     if (keyword != null) {
       return makeToken(keyword);
     }
