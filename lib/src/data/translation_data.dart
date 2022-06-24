@@ -84,6 +84,11 @@ class TranslationData {
     };
   }
 
+  // TODO: Optimize
+  Set<String> get skip {
+    return {for (final word in others['skip']) word};
+  }
+
   Map<String, TokenType>? _tokenMapCache;
   Map<String, TokenType> get tokenMap {
     if (_tokenMapCache == null) {

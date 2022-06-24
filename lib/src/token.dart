@@ -2,7 +2,7 @@
 
 class Token {
   const Token(this.type, this.value, this.line);
-  const Token.empty() : this(TokenType.ERROR, "", 0);
+  const Token.empty() : this(TokenType.CT_ERROR, "", 0);
 
   final int line;
   final TokenType type;
@@ -37,8 +37,9 @@ enum TokenType {
   NUMBER,
   identifier, // TODO: to be removed
 
-  ERROR,
-  EOF,
+  CT_SKIP,
+  CT_ERROR,
+  CT_EOF,
 }
 
 const keywords = <String, TokenType>{

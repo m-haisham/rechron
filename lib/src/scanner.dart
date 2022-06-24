@@ -19,7 +19,7 @@ class Scanner {
     skipWhitespace();
     start = current;
 
-    if (isAtEnd) return makeToken(TokenType.EOF);
+    if (isAtEnd) return makeToken(TokenType.CT_EOF);
 
     final c = advance();
 
@@ -55,7 +55,7 @@ class Scanner {
   }
 
   Token errorToken(String value) {
-    return Token(TokenType.ERROR, value, line);
+    return Token(TokenType.CT_ERROR, value, line);
   }
 
   void skipWhitespace() {
@@ -119,6 +119,10 @@ class Scanner {
     }
 
     final value = characters.sublist(start, current).join();
+    if (data.skip.contains(value)) {
+      return makeToken(TokenType.CT_SKIP);
+    }
+
     final keyword = keywords[value] ?? data.tokenMap[value];
     if (keyword != null) {
       return makeToken(keyword);

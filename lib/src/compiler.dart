@@ -27,7 +27,7 @@ class Parser {
   bool compile() {
     advance();
     expression();
-    consume(TokenType.EOF, "Expect end of expression.");
+    consume(TokenType.CT_EOF, "Expect end of expression.");
     endCompiler();
     return !hadError;
   }
@@ -37,9 +37,13 @@ class Parser {
 
     while (true) {
       current = scanner.scanToken();
-      if (current.type != TokenType.ERROR) break;
-
-      errorAtCurrent(current.value);
+      if (current.type == TokenType.CT_SKIP) {
+        continue;
+      } else if (current.type == TokenType.CT_ERROR) {
+        errorAtCurrent(current.value);
+      } else {
+        break;
+      }
     }
   }
 
@@ -219,9 +223,9 @@ class Parser {
 
     stdout.write('Error');
 
-    if (token.type == TokenType.EOF) {
+    if (token.type == TokenType.CT_EOF) {
       stdout.write(' at end');
-    } else if (token.type == TokenType.ERROR) {
+    } else if (token.type == TokenType.CT_ERROR) {
       // Nothing.
     } else {
       stdout.write(" at '${token.value}'");

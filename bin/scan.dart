@@ -9,7 +9,7 @@ void main(List<String> args) {
   final scanner = Scanner(content, data: data);
   while (true) {
     final token = scanner.scanToken();
-    if (token.type == TokenType.EOF) {
+    if (token.type == TokenType.CT_EOF) {
       break;
     }
 
