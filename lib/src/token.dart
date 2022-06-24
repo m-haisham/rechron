@@ -18,11 +18,6 @@ enum TokenType {
   // Single-character tokens.
   COMMA,
 
-  // Keywords.
-  YESTERDAY,
-  TODAY,
-  TOMORROW,
-
   DECADE, // Timeframe.
   YEAR,
   MONTH,
@@ -47,11 +42,6 @@ enum TokenType {
 }
 
 const keywords = <String, TokenType>{
-  // Adjacent.
-  'yesterday': TokenType.YESTERDAY,
-  'today': TokenType.TODAY,
-  'tomorrow': TokenType.TOMORROW,
-
   // Timeframes.
   'decade': TokenType.DECADE,
   'year': TokenType.YEAR,

@@ -79,22 +79,7 @@ class Parser {
   }
 
   void relative() {
-    if (match(TokenType.YESTERDAY)) {
-      emitConstant(Value.number(1));
-      emitByte(OpCode.DURATION_DAYS.index);
-      emitByte(OpCode.DIRECTION_AGO.index);
-      emitByte(OpCode.INTO_DATE.index);
-    } else if (match(TokenType.TODAY)) {
-      emitConstant(Value.number(0));
-      emitByte(OpCode.DURATION_DAYS.index);
-      emitByte(OpCode.DIRECTION_AGO.index);
-      emitByte(OpCode.INTO_DATE.index);
-    } else if (match(TokenType.TOMORROW)) {
-      emitConstant(Value.number(1));
-      emitByte(OpCode.DURATION_DAYS.index);
-      emitByte(OpCode.DIRECTION_REMAINING.index);
-      emitByte(OpCode.INTO_DATE.index);
-    } else if (match(TokenType.IN)) {
+    if (match(TokenType.IN)) {
       inExact();
     } else {
       exact();
