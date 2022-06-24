@@ -70,9 +70,9 @@ class Parser {
     emitReturn();
 
     // DEBUG: Comment out when testing is done
-    if (!hadError) {
-      disassembleChunk(chunk, 'code');
-    }
+    // if (!hadError) {
+    //   disassembleChunk(chunk, 'code');
+    // }
     // DEBUG
   }
 
