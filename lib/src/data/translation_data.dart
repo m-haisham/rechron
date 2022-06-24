@@ -53,6 +53,10 @@ class TranslationData {
       source = source.replaceAll(entry.key, entry.value);
     }
 
+    for (final entry in relativeTypeRegex.entries) {
+      source = RegExp(entry.key).sub(entry.value, source);
+    }
+
     return source;
   }
 
@@ -71,6 +75,13 @@ class TranslationData {
     }
 
     return data;
+  }
+
+  Map<String, String> get relativeTypeRegex {
+    return {
+      for (final entry in others['relative-type-regex'].entries)
+        for (final value in entry.value) value: entry.key,
+    };
   }
 
   Map<String, TokenType>? _tokenMapCache;
