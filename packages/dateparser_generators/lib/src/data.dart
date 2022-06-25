@@ -31,11 +31,11 @@ class Data {
 
     for (final entry in keywords.entries) {
       for (final value in info[entry.key] ?? const []) {
-        map[value] = CodeExpression(Code(entry.value.toString()));
+        map[value] = referCore(entry.value.toString());
       }
 
       for (final value in others[entry.key] ?? const []) {
-        map[value] = CodeExpression(Code(entry.value.toString()));
+        map[value] = referCore(entry.value.toString());
       }
     }
 
@@ -99,9 +99,10 @@ class Data {
     );
   }
 
+  Map<String, dynamic> get localeSpecific => info['locale_specific'] ?? {};
+
   String build() {
     final emitter = DartEmitter.scoped();
-    final packageName = 'dateparser_core';
 
     final data = literal({
       'skip': literal(skip),
@@ -110,14 +111,11 @@ class Data {
       'relativeTypeRegex': literal(relativeTypeRegex),
       'simplifications': literal(simplifications),
       'simplificationsRegex': literal(simplificationsRegex),
+      'localeSpecific': literal(localeSpecific),
     });
 
     final library = Library(
       (b) => b.body.addAll([
-        Directive.import(
-          'package:$packageName/$packageName.dart',
-          show: ['TokenType'],
-        ),
         Code('const data = <String, dynamic>${data.accept(emitter)};'),
       ]),
     );
@@ -125,5 +123,7 @@ class Data {
     return library.accept(emitter).toString();
   }
 
-  String safeEscape(String value) => value.replaceAll(r'\', r'\\');
+  Expression referCore(String symbol) {
+    return refer(symbol, 'package:dateparser_core/dateparser_core.dart');
+  }
 }
