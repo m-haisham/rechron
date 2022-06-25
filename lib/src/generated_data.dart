@@ -2,12 +2,12 @@ import 'package:dateparser/generated/generated.dart' as generated;
 import 'package:dateparser_core/dateparser_core.dart';
 
 class GeneratedData extends LangData {
-  GeneratedData(this.lang) : data = generated.data[_getLocale(lang)]!;
+  GeneratedData(this.locale) : data = generated.data[_getLang(locale)]!;
 
-  final String lang;
+  final String locale;
   final Map<String, dynamic> data;
 
-  String get locale => _getLocale(lang);
+  String get lang => _getLang(locale);
 
   @override
   Map<String, String> get relativeType => data['relativeType'];
@@ -34,5 +34,5 @@ class GeneratedData extends LangData {
   Map<String, TokenType> get tokenMap => data['tokenMap'];
 }
 
-String _getLocale(String lang) =>
+String _getLang(String lang) =>
     lang.contains('-') ? lang.split('-').first : lang;
