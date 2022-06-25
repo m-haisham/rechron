@@ -10,16 +10,22 @@ class GeneratedData extends LangData {
   String get locale => _getLocale(lang);
 
   @override
-  Map<String, String> get relativeType => data['relative-type'];
+  Map<String, String> get relativeType => data['relativeType'];
 
   @override
-  Map<RegExp, String> get relativeTypeRegex => data['relative-type-regex'];
+  Map<RegExp, String> get relativeTypeRegex => {
+        for (final entry in data['relativeTypeRegex'].entries)
+          RegExp(entry.key): entry.value
+      };
 
   @override
   Map<String, String> get simplifications => data['simplifications'];
 
   @override
-  Map<RegExp, String> get simplificationsRegex => data['simplifications-regex'];
+  Map<RegExp, String> get simplificationsRegex => {
+        for (final entry in data['simplificationsRegex'].entries)
+          RegExp(entry.key): entry.value
+      };
 
   @override
   Set<String> get skip => data['skip'];

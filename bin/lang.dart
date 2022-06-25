@@ -1,4 +1,4 @@
-import 'package:dateparser/src/lang_data.dart';
+import 'package:dateparser/src/generated_data.dart';
 
 void main(List<String> args) {
   final locale = args.isEmpty ? 'en' : args.first;

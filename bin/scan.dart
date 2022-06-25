@@ -1,4 +1,4 @@
-import 'package:dateparser/src/lang_data.dart';
+import 'package:dateparser/src/generated_data.dart';
 import 'package:dateparser_core/dateparser_core.dart';
 
 void main(List<String> args) {
