@@ -8,6 +8,8 @@ import 'package:path/path.dart' as path;
 import 'package:build/build.dart';
 import 'package:yaml/yaml.dart';
 
+import 'data.dart';
+
 class DataBuilder extends Builder {
   final String header = '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -40,24 +42,8 @@ class DataBuilder extends Builder {
   }
 
   Future<void> buildLang(BuildStep buildStep, String lang) async {
-    final info = jsonDecode(
-      await File('data/translation_data/$lang.json').readAsString(),
-    );
-
-    final supp = loadYaml(
-        await File('data/supplementary_data/$lang.yaml').readAsString());
-
-    final data = """
-      const data = {
-        "translation": _translation,
-        "supplementary": _supplementary, 
-      };
-
-      const _translation = ${jsonEncode(info)};
-      const _supplementary = ${jsonEncode(supp)};
-    """;
-
-    writeLang(buildStep, lang, formatter.format(data));
+    final data = await Data.fromLang(lang);
+    writeLang(buildStep, lang, formatter.format(data.build()));
   }
 
   void buildData(BuildStep buildStep) {

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dateparser/src/data/translation_data.dart';
 import 'package:dateparser/src/debug.dart';
-import 'package:dateparser/src/token.dart';
 import 'package:dateparser/src/value.dart';
+import 'package:dateparser_core/dateparser_core.dart';
 
 import 'chunk.dart';
 import 'scanner.dart';

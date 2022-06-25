@@ -46,22 +46,6 @@
     "in 1 week": ["next week", "next wk"],
     "in 1 year": ["next year", "next yr"]
   },
-  "relative-type-regex": {
-    "\\1 day ago": ["{0} day ago", "{0} days ago"],
-    "\\1 hour ago": ["{0} hour ago", "{0} hours ago", "{0} hr ago"],
-    "\\1 minute ago": ["{0} min ago", "{0} minute ago", "{0} minutes ago"],
-    "\\1 month ago": ["{0} mo ago", "{0} month ago", "{0} months ago"],
-    "\\1 second ago": ["{0} sec ago", "{0} second ago", "{0} seconds ago"],
-    "\\1 week ago": ["{0} week ago", "{0} weeks ago", "{0} wk ago"],
-    "\\1 year ago": ["{0} year ago", "{0} years ago", "{0} yr ago"],
-    "in \\1 day": ["in {0} day", "in {0} days"],
-    "in \\1 hour": ["in {0} hour", "in {0} hours", "in {0} hr"],
-    "in \\1 minute": ["in {0} min", "in {0} minute", "in {0} minutes"],
-    "in \\1 month": ["in {0} mo", "in {0} month", "in {0} months"],
-    "in \\1 second": ["in {0} sec", "in {0} second", "in {0} seconds"],
-    "in \\1 week": ["in {0} week", "in {0} weeks", "in {0} wk"],
-    "in \\1 year": ["in {0} year", "in {0} years", "in {0} yr"]
-  },
   "locale_specific": {
     "en-001": {
       "name": "en-001",

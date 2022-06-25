@@ -1,5 +1,4 @@
 import 'package:dateparser/generated/generated.dart' as generated;
-import 'package:dateparser/src/token.dart';
 import 'package:dateparser/src/utils.dart';
 
 // TODO: optimize

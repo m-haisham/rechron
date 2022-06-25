@@ -1,7 +1,6 @@
 import 'package:characters/characters.dart';
 import 'package:dateparser/src/data/translation_data.dart';
-
-import 'token.dart';
+import 'package:dateparser_core/dateparser_core.dart';
 
 class Scanner {
   Scanner(String content, {required this.data})

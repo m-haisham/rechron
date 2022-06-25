@@ -11,6 +11,9 @@ dependencies:
   yaml: ^3.1.1
   benchmark_harness: ^2.1.0
 
+  dateparser_core:
+    path: packages/dateparser_core
+
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.16.0

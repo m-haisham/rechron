@@ -1,6 +1,6 @@
 import 'package:dateparser/src/data/translation_data.dart';
 import 'package:dateparser/src/scanner.dart';
-import 'package:dateparser/src/token.dart';
+import '../packages/dateparser_core/lib/src/token.dart';
 
 void main(List<String> args) {
   final data = TranslationData('en');
