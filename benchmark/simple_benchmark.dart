@@ -5,7 +5,7 @@ import 'package:dateparser/src/generated_data.dart';
 class SimpleBenchmark extends BenchmarkBase {
   SimpleBenchmark() : super('Simple');
 
-  final data = GeneratedData('en');
+  final data = GeneratedData('en-SG');
 
   @override
   void run() {

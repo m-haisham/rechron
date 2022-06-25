@@ -10,16 +10,54 @@ class GeneratedData extends LocaleData with CacheMixin {
 
   String get lang => _getLang(locale);
 
+  /// Whether the data is locale specific.
+  bool get isLocale => locale.contains('-');
+
+  Map<String, dynamic>? get localeData => data['localeSpecific'][locale];
+
   @override
-  Map<String, String> get relativeType => data['relativeType'];
+  Map<String, String> get relativeType {
+    return cachedData('relativeType', () {
+      Map<String, String> map = data['relativeType'];
+
+      if (!isLocale) {
+        return map;
+      }
+
+      final other = localeData?['relativeType'];
+      if (other != null) {
+        map = {...map, ...other};
+      }
+
+      return map;
+    });
+  }
 
   @override
   Map<RegExp, String> get relativeTypeRegex {
     return cachedData(
       'relativeTypeRegex',
-      () => {
-        for (final entry in data['relativeTypeRegex'].entries)
-          RegExp(entry.key): entry.value
+      () {
+        final map = <RegExp, String>{
+          for (final entry in data['relativeTypeRegex'].entries)
+            RegExp(entry.key): entry.value,
+        };
+
+        if (!isLocale) {
+          return map;
+        }
+
+        for (final entry
+            in localeData?['relativeTypeRegex']?.entries ?? const {}) {
+          map[RegExp(entry.key)] = entry.value;
+        }
+
+        return Map.fromEntries(
+          map.entries.toList()
+            ..sort(
+              (a, b) => b.key.pattern.length.compareTo(a.key.pattern.length),
+            ),
+        );
       },
     );
   }
@@ -42,7 +80,10 @@ class GeneratedData extends LocaleData with CacheMixin {
   Set<String> get skip => data['skip'];
 
   @override
-  Map<String, TokenType> get tokenMap => data['tokenMap'];
+  Map<String, TokenType> get tokenMap => {
+        ...data['tokenMap'],
+        if (isLocale) ...?localeData?['tokenMap'],
+      };
 }
 
 String _getLang(String lang) =>

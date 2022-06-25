@@ -104,21 +104,7 @@
     },
     "en-CA": {
       "name": "en-CA",
-      "date_order": "YMD",
-      "relative-type-regex": {
-        "\\1 hour ago": ["{0} hrs ago"],
-        "\\1 minute ago": ["{0} mins ago"],
-        "\\1 month ago": ["{0} mos ago"],
-        "\\1 second ago": ["{0} secs ago"],
-        "\\1 week ago": ["{0} wks ago"],
-        "\\1 year ago": ["{0} yrs ago"],
-        "in \\1 hour": ["in {0} hrs"],
-        "in \\1 minute": ["in {0} mins"],
-        "in \\1 month": ["in {0} mos"],
-        "in \\1 second": ["in {0} secs"],
-        "in \\1 week": ["in {0} wks"],
-        "in \\1 year": ["in {0} yrs"]
-      }
+      "date_order": "YMD"
     },
     "en-CC": {
       "name": "en-CC",
@@ -384,10 +370,6 @@
         "0 month ago": ["this mth"],
         "1 month ago": ["last mth"],
         "in 1 month": ["next mth"]
-      },
-      "relative-type-regex": {
-        "\\1 month ago": ["{0} mth ago"],
-        "in \\1 month": ["in {0} mth"]
       }
     },
     "en-SH": {

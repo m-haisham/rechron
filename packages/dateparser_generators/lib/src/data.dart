@@ -26,7 +26,10 @@ class Data {
 
   Set<String> get skip => {for (final value in others['skip']) value};
 
-  Map<String, Expression> get tokenMap {
+  Map<String, Expression> tokenMap(
+    Map<String, dynamic> info, [
+    Map<String, dynamic> others = const {},
+  ]) {
     final map = <String, Expression>{};
 
     for (final entry in keywords.entries) {
@@ -42,7 +45,10 @@ class Data {
     return map;
   }
 
-  Map<String, String> get relativeType {
+  Map<String, String> relativeType(
+    Map<String, dynamic> info, [
+    Map<String, dynamic> others = const {},
+  ]) {
     final map = <String, String>{
       for (final entry in info['relative-type']?.entries ?? [])
         for (final value in entry.value) value: entry.key,
@@ -58,7 +64,10 @@ class Data {
     );
   }
 
-  Map<Expression, Expression> get relativeTypeRegex {
+  Map<Expression, Expression> relativeTypeRegex(
+    Map<String, dynamic> info, [
+    Map<String, dynamic> others = const {},
+  ]) {
     final map = <Expression, Expression>{
       for (final entry in info['relative-type-regex']?.entries ?? [])
         for (final value in entry.value)
@@ -99,19 +108,41 @@ class Data {
     );
   }
 
-  Map<String, dynamic> get localeSpecific => info['locale_specific'] ?? {};
+  Map<String, dynamic> get localeSpecific {
+    final map = <String, Expression>{};
+    for (final entry in (info['locale_specific'] ?? {}).entries) {
+      map[entry.key] = buildLocaleSpecific(entry.value);
+    }
+
+    return map;
+  }
+
+  Expression buildLocaleSpecific(Map<String, dynamic> localeInfo) {
+    final localeTokenMap = tokenMap(localeInfo);
+    final localeRelativeType = relativeType(localeInfo);
+    final localeRelativeTypeRegex = relativeTypeRegex(localeInfo);
+
+    return literal({
+      'name': localeInfo['name'],
+      if (localeTokenMap.isNotEmpty) 'tokenMap': localeTokenMap,
+      if (localeRelativeType.isNotEmpty) 'relativeType': localeRelativeType,
+      if (localeRelativeTypeRegex.isNotEmpty)
+        'relativeTypeRegex': localeRelativeTypeRegex,
+    });
+  }
 
   String build() {
     final emitter = DartEmitter.scoped();
 
     final data = literal({
-      'skip': literal(skip),
-      'tokenMap': literal(tokenMap),
-      'relativeType': literal(relativeType),
-      'relativeTypeRegex': literal(relativeTypeRegex),
-      'simplifications': literal(simplifications),
-      'simplificationsRegex': literal(simplificationsRegex),
-      'localeSpecific': literal(localeSpecific),
+      'name': info['name'],
+      'skip': skip,
+      'tokenMap': tokenMap(info, others),
+      'relativeType': relativeType(info, others),
+      'relativeTypeRegex': relativeTypeRegex(info, others),
+      'simplifications': simplifications,
+      'simplificationsRegex': simplificationsRegex,
+      'localeSpecific': localeSpecific,
     });
 
     final library = Library(
