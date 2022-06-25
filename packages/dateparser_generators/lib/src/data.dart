@@ -26,7 +26,7 @@ class Data {
 
   Set<String> get skip => {for (final value in others['skip']) value};
 
-  Map<String, Expression> get tokens {
+  Map<String, Expression> get tokenMap {
     final map = <String, Expression>{};
 
     for (final entry in keywords.entries) {
@@ -105,7 +105,7 @@ class Data {
 
     final data = literal({
       'skip': literal(skip),
-      'tokens': literal(tokens),
+      'tokenMap': literal(tokenMap),
       'relativeType': literal(relativeType),
       'relativeTypeRegex': literal(relativeTypeRegex),
       'simplifications': literal(simplifications),
@@ -118,7 +118,7 @@ class Data {
           'package:$packageName/$packageName.dart',
           show: ['TokenType'],
         ),
-        Code('const data = ${data.accept(emitter)};'),
+        Code('const data = <String, dynamic>${data.accept(emitter)};'),
       ]),
     );
 

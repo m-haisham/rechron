@@ -1,13 +1,10 @@
 library dateparser;
 
-import 'package:dateparser/src/chunk.dart';
-import 'package:dateparser/src/compiler.dart';
-import 'package:dateparser/src/data/translation_data.dart';
-import 'package:dateparser/src/value.dart';
-import 'package:dateparser/src/vm.dart';
+import 'package:dateparser/src/lang_data.dart';
+import 'package:dateparser_core/dateparser_core.dart';
 
 DateTime parse(String source) {
-  final data = TranslationData('en');
+  final data = GeneratedData('en');
   source = data.preprocess(source);
 
   final chunk = Chunk();

@@ -1,22 +1,24 @@
 import 'dart:io';
 
-import 'package:dateparser/src/data/translation_data.dart';
-import 'package:dateparser/src/debug.dart';
-import 'package:dateparser/src/value.dart';
 import 'package:dateparser_core/dateparser_core.dart';
+import 'package:dateparser_core/src/lang_data.dart';
+import 'package:dateparser_core/src/value.dart';
 
 import 'chunk.dart';
 import 'scanner.dart';
 
 class Parser {
-  Parser(this.source, this.chunk, {required this.data})
-      : scanner = Scanner(source, data: data);
+  Parser(
+    this.source,
+    this.chunk, {
+    required this.data,
+  }) : scanner = Scanner(source, data: data);
 
   final String source;
   final Chunk chunk;
   final Scanner scanner;
 
-  final TranslationData data;
+  final LangData data;
 
   Token previous = Token.empty();
   Token current = Token.empty();

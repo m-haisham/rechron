@@ -1,9 +1,8 @@
-import 'package:dateparser/src/data/translation_data.dart';
-import 'package:dateparser/src/scanner.dart';
-import '../packages/dateparser_core/lib/src/token.dart';
+import 'package:dateparser/src/lang_data.dart';
+import 'package:dateparser_core/dateparser_core.dart';
 
 void main(List<String> args) {
-  final data = TranslationData('en');
+  final data = GeneratedData('en');
   final content = data.preprocess(args.first);
 
   final scanner = Scanner(content, data: data);

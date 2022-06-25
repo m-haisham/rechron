@@ -1,13 +1,13 @@
 import 'package:characters/characters.dart';
-import 'package:dateparser/src/data/translation_data.dart';
 import 'package:dateparser_core/dateparser_core.dart';
+import 'package:dateparser_core/src/lang_data.dart';
 
 class Scanner {
   Scanner(String content, {required this.data})
       : characters = content.characters.toList();
 
   final List<String> characters;
-  final TranslationData data;
+  final LangData data;
 
   int start = 0;
   int current = 0;

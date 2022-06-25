@@ -4,6 +4,6 @@
 
 import 'lang/en.dart' as _i1;
 
-const data = {
+const data = <String, Map<String, dynamic>>{
   "en": _i1.data,
 };

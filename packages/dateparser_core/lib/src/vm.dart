@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dateparser/src/debug.dart';
+import 'package:dateparser_core/src/debug.dart';
 
 import 'chunk.dart';
 import 'value.dart';

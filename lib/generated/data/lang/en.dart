@@ -4,7 +4,7 @@
 
 import 'package:dateparser_core/dateparser_core.dart' show TokenType;
 
-const data = {
+const data = <String, dynamic>{
   'skip': {
     'about',
     'ad',
@@ -21,7 +21,7 @@ const data = {
     'th',
     'the'
   },
-  'tokens': {
+  'tokenMap': {
     'decade': TokenType.DECADE,
     'decades': TokenType.DECADE,
     'year': TokenType.YEAR,

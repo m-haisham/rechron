@@ -52,7 +52,7 @@ class DataBuilder extends Builder {
     final dataLibrary = Library(
       (b) => b.body.addAll([
         Code([
-          'const data = {',
+          'const data = <String, Map<String, dynamic>>{',
           for (final lang in data['langs'])
             '"$lang": ${refer("data", 'lang/$lang.dart').accept(emitter)},',
           '};'
