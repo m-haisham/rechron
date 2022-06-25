@@ -1,12 +1,15 @@
 import 'package:benchmark_harness/benchmark_harness.dart';
 import 'package:dateparser/dateparser.dart';
+import 'package:dateparser/src/generated_data.dart';
 
 class SimpleBenchmark extends BenchmarkBase {
-  const SimpleBenchmark() : super('Simple');
+  SimpleBenchmark() : super('Simple');
+
+  final data = GeneratedData('en');
 
   @override
   void run() {
-    parse('1 minute ago');
+    parse('1 minute ago', locale: data);
   }
 
   @override
@@ -18,5 +21,5 @@ class SimpleBenchmark extends BenchmarkBase {
 }
 
 void main(List<String> args) {
-  const SimpleBenchmark().report();
+  SimpleBenchmark().report();
 }

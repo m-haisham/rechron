@@ -1,7 +1,7 @@
 import 'package:dateparser_core/src/token.dart';
 import 'package:dateparser_core/src/utils.dart';
 
-abstract class LangData {
+abstract class LocaleData {
   String preprocess(String source) {
     source = simplify(source);
     source = relative(source);

@@ -3,8 +3,8 @@ library dateparser;
 import 'package:dateparser/src/generated_data.dart';
 import 'package:dateparser_core/dateparser_core.dart';
 
-DateTime parse(String source) {
-  final data = GeneratedData('en');
+DateTime parse(String source, {LocaleData? locale}) {
+  final data = locale ?? GeneratedData('en');
   source = data.preprocess(source);
 
   final chunk = Chunk();

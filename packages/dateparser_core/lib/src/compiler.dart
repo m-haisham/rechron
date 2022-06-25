@@ -18,7 +18,7 @@ class Parser {
   final Chunk chunk;
   final Scanner scanner;
 
-  final LangData data;
+  final LocaleData data;
 
   Token previous = Token.empty();
   Token current = Token.empty();

@@ -7,7 +7,7 @@ class Scanner {
       : characters = content.characters.toList();
 
   final List<String> characters;
-  final LangData data;
+  final LocaleData data;
 
   int start = 0;
   int current = 0;
