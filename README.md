@@ -1,4 +1,4 @@
-# rechron
+# Rechron
 
 Dart library for parsing relative date and time.
 
@@ -6,8 +6,7 @@ Dart library for parsing relative date and time.
 
 ```yaml
 dependencies:
-  rechron:
-    git: https://github.com/mensch272/rechron
+  rechron: ^0.1.0
 ```
 
 ## Usage
