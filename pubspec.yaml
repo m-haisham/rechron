@@ -1,6 +1,6 @@
 name: dateparser
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: Dart library for parsing relative date and time.
+version: 0.1.0
 # homepage: https://www.example.com
 
 environment:

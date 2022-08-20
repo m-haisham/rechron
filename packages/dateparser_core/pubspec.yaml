@@ -1,6 +1,6 @@
 name: dateparser_core
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
+description: This library provides core functionality for dateparser.
+version: 0.1.0
 # homepage: https://www.example.com
 
 environment:

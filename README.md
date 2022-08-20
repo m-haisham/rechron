@@ -2,18 +2,28 @@
 
 Dart library for parsing relative date and time.
 
-## Examples
+## Installation
 
-- just now
-- a moment ago
-- tomorrow
-- today
-- yesterday
-- 10 days remaining
-- 2 hours ago
-- 2 months ago
-- 3 hours, 1 minute, and 2 seconds ago
-- in 3 minutes
+```yaml
+dependencies:
+  dateparser:
+    git: https://github.com/mensch272/dateparser
+```
+
+## Usage
+
+```dart
+import 'package:dateparser/dateparser' as dateparser;
+
+dateparser.parse('a moment ago');
+// 2022-08-20 19:18:49.761788
+
+dateparser.parse('2 hours ago');
+// 2022-08-20 17:17:13.154895
+
+dateparser.parse('in 2 days, 5 hours');
+// 2022-08-23 00:18:35.610707
+```
 
 ## License
 
