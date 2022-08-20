@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      generators|annotations:
+        enabled: true
+
+builders:
+  generators:
+    target: ":rechron_generators"
+    import: "package:rechron_generators/builder.dart"
+    builder_factories: ["dataBuilder"]
+    build_extensions: { "$lib$": [".g.dart"] }
+    auto_apply: dependents
+    build_to: source
