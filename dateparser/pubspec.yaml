@@ -12,7 +12,7 @@ dependencies:
   benchmark_harness: ^2.1.0
 
   dateparser_core:
-    path: packages/dateparser_core
+    path: ../dateparser_core
 
 dev_dependencies:
   lints: ^2.0.0
@@ -20,4 +20,4 @@ dev_dependencies:
 
   build_runner:
   dateparser_generators:
-    path: packages/dateparser_generators
+    path: ../dateparser_generators
