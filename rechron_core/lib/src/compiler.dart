@@ -66,11 +66,9 @@ class Parser {
   void endCompiler() {
     emitReturn();
 
-    // DEBUG: Comment out when testing is done
-    // if (!hadError) {
-    //   disassembleChunk(chunk, 'code');
-    // }
-    // DEBUG
+    if (RechronConfig.isDebug && !hadError) {
+      disassembleChunk(chunk, 'code');
+    }
   }
 
   // Expressions.

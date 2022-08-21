@@ -1,9 +1,6 @@
 import 'dart:io';
 
-import 'package:rechron_core/src/debug.dart';
-
-import 'chunk.dart';
-import 'value.dart';
+import 'package:rechron_core/rechron_core.dart';
 
 enum InterpretResult {
   ok,
@@ -21,14 +18,14 @@ class VM {
 
   InterpretResult run() {
     while (true) {
-      // DEBUG: Comment out when testing is done
-      // stdout.write('     ');
-      // for (final value in stack.reversed) {
-      //   stdout.write('[$value]');
-      // }
-      // stdout.write('\n');
-      // disassembleIntruction(chunk, ip);
-      // End DEBUG
+      if (RechronConfig.isDebug) {
+        stdout.write('     ');
+        for (final value in stack.reversed) {
+          stdout.write('[$value]');
+        }
+        stdout.write('\n');
+        disassembleIntruction(chunk, ip);
+      }
 
       final instruction = read().toCode();
       switch (instruction) {

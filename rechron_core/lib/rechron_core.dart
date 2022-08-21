@@ -9,3 +9,4 @@ export 'src/token.dart';
 export 'src/utils.dart';
 export 'src/value.dart';
 export 'src/vm.dart';
+export 'src/config.dart';

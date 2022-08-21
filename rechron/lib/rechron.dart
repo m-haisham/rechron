@@ -3,6 +3,8 @@ library rechron;
 import 'package:rechron/src/generated_data.dart';
 import 'package:rechron_core/rechron_core.dart';
 
+export 'package:rechron_core/rechron_core.dart';
+
 DateTime parse(String source, {LocaleData? locale}) {
   final data = locale ?? GeneratedData('en');
   source = data.preprocess(source);

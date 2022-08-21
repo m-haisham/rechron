@@ -10,7 +10,8 @@ dependencies:
   characters: ^1.2.1
   yaml: ^3.1.1
   benchmark_harness: ^2.1.0
-  rechron_core: ^0.1.1-dev.1
+  rechron_core:
+    path: ../rechron_core
 
 dev_dependencies:
   lints: ^2.0.0

@@ -3,6 +3,8 @@ description: This library contains generators used in rechron.
 version: 0.1.1-dev.1
 repository: https://github.com/mensch272/rechron
 
+publish_to: none
+
 environment:
   sdk: '>=2.17.6 <3.0.0'
 
@@ -14,7 +16,8 @@ dependencies:
   path: ^1.8.2
   dart_style: ^2.2.3
   yaml: ^3.1.1
-  rechron_core: ^0.1.1-dev.1
+  rechron_core:
+    path: ../rechron_core
 
 dev_dependencies:
   lints: ^2.0.0
