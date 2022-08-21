@@ -1,11 +1,6 @@
 import 'dart:io';
 
 import 'package:rechron_core/rechron_core.dart';
-import 'package:rechron_core/src/lang_data.dart';
-import 'package:rechron_core/src/value.dart';
-
-import 'chunk.dart';
-import 'scanner.dart';
 
 class Parser {
   Parser(
@@ -80,10 +75,12 @@ class Parser {
 
   // Expressions.
 
+  /// [relative]
   void expression() {
     relative();
   }
 
+  /// [inExact] | [exact]
   void relative() {
     if (match(TokenType.IN)) {
       inExact();
@@ -92,16 +89,19 @@ class Parser {
     }
   }
 
+  /// 'in' [durationChain]
   void inExact() {
     durationChain();
     emitByte(OpCode.DIRECTION_REMAINING.index);
   }
 
+  /// [durationChain] ( ago | remaining )
   void exact() {
     durationChain();
     direction();
   }
 
+  /// [duration] (("," [duration])+ "and" [duration] )?
   void durationChain() {
     duration();
     if (match(TokenType.COMMA)) {
@@ -123,6 +123,7 @@ class Parser {
     }
   }
 
+  /// number [timeframe]
   void duration() {
     if (match(TokenType.NUMBER)) {
       emitConstant(Value.number(double.parse(previous.value)));
@@ -132,6 +133,8 @@ class Parser {
     }
   }
 
+  /// 'moment' | 'second' | 'minute' | 'hour' | 'day' | 'week' |
+  /// 'month' | 'year' | 'decade'
   void timeframe() {
     if (match(TokenType.MOMENT)) {
       emitByte(OpCode.DURATION_MOMENT.index);
@@ -168,6 +171,7 @@ class Parser {
     }
   }
 
+  /// 'ago' | 'remaining'
   void direction() {
     if (match(TokenType.AGO)) {
       emitByte(OpCode.DIRECTION_AGO.index);
@@ -178,6 +182,7 @@ class Parser {
     }
   }
 
+  /// Parse a number literal
   void number() {
     final value = double.parse(previous.value);
     emitConstant(Value.number(value));
