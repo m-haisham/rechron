@@ -12,7 +12,7 @@ DateTime parse(String source, {LocaleData? locale}) {
   final chunk = Chunk();
   final parser = Parser(source, chunk, data: data);
   if (!parser.compile()) {
-    throw Exception(); // FIXME: custom exception class
+    throw CompileException();
   }
 
   final vm = VM(chunk);
@@ -22,12 +22,12 @@ DateTime parse(String source, {LocaleData? locale}) {
       break;
     case InterpretResult.compileError:
     case InterpretResult.runtimeError:
-      throw Exception(); // FIXME: custom exception class
+      throw RuntimeException();
   }
 
   final value = vm.stack.removeLast();
   if (value is! DateTimeValue) {
-    throw Exception(); // FIXME: custom exception class
+    throw UnexpectedResultException();
   }
 
   return value.value;
