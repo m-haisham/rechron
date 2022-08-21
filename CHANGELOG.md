@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning].
 ### Added
 
 - Added custom exceptions.
+- Added `en` language tests.
 
 ### Changed
 
