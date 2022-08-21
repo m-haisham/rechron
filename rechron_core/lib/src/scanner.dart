@@ -127,7 +127,7 @@ class Scanner {
       return makeToken(keyword);
     }
 
-    return makeToken(TokenType.identifier);
+    return errorToken("Unrecognized keyword");
   }
 
   Token number() {

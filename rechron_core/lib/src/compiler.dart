@@ -32,7 +32,8 @@ class Parser {
   void advance() {
     previous = current;
 
-    while (true) {
+    // Parse until an error has been encountered
+    while (!hadError) {
       current = scanner.scanToken();
       if (current.type == TokenType.CT_SKIP) {
         continue;
@@ -226,17 +227,20 @@ class Parser {
     if (panicMode) return;
     panicMode = true;
 
-    stdout.write('Error');
+    if (RechronConfig.isDebug) {
+      stdout.write('Error');
 
-    if (token.type == TokenType.CT_EOF) {
-      stdout.write(' at end');
-    } else if (token.type == TokenType.CT_ERROR) {
-      // Nothing.
-    } else {
-      stdout.write(" at '${token.value}'");
+      if (token.type == TokenType.CT_EOF) {
+        stdout.write(' at end');
+      } else if (token.type == TokenType.CT_ERROR) {
+        // Nothing.
+      } else {
+        stdout.write(" at '${token.value}'");
+      }
+
+      stdout.write(": $message\n");
     }
 
-    stdout.write(": $message\n");
     hadError = true;
   }
 }

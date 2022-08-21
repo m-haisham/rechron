@@ -2,10 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+The format is based on [Keep a Changelog].
+and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
+
+### Added
+
+- Added custom exceptions.
+
+### Changed
+
+- Unrecognized tokens now return [TokenType.CT_ERROR].
+- Terminate on error in compiler.
 
 ## 0.1.1-dev.1
 

@@ -35,7 +35,6 @@ enum TokenType {
 
   // Literals.
   NUMBER,
-  identifier, // TODO: to be removed
 
   CT_SKIP,
   CT_ERROR,
