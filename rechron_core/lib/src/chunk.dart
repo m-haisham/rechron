@@ -1,26 +1,22 @@
-// ignore_for_file: constant_identifier_names
 
 import 'package:rechron_core/src/value.dart';
 
 enum OpCode {
-  PUSH_DATETIME_NOW,
-  INTO_DATE,
+  durationDay,
+  durationHour,
+  durationMinute,
+  durationSecond,
+  durationMoment,
 
-  DURATION_DAYS,
-  DURATION_HOURS,
-  DURATION_MINUTES,
-  DURATION_SECONDS,
-  DURATION_MOMENT,
+  directionAgo,
+  directionIn,
 
-  DIRECTION_AGO,
-  DIRECTION_REMAINING,
+  constant,
 
-  CONSTANT,
+  add,
+  multiply,
 
-  ADD,
-  MULTIPLY,
-
-  RETURN;
+  end;
 
   static from(int index) => OpCode.values[index];
 }

@@ -24,7 +24,7 @@ class Parser {
   bool compile() {
     advance();
     expression();
-    consume(TokenType.CT_EOF, "Expect end of expression.");
+    consume(TokenType.eof, "Expect end of expression.");
     endCompiler();
     return !hadError;
   }
@@ -35,9 +35,9 @@ class Parser {
     // Parse until an error has been encountered
     while (!hadError) {
       current = scanner.scanToken();
-      if (current.type == TokenType.CT_SKIP) {
+      if (current.type == TokenType.skip) {
         continue;
-      } else if (current.type == TokenType.CT_ERROR) {
+      } else if (current.type == TokenType.error) {
         errorAtCurrent(current.value);
       } else {
         break;
@@ -81,7 +81,7 @@ class Parser {
 
   /// [inExact] | [exact]
   void relative() {
-    if (match(TokenType.IN)) {
+    if (match(TokenType.keyIn)) {
       inExact();
     } else {
       exact();
@@ -91,7 +91,7 @@ class Parser {
   /// 'in' [durationChain]
   void inExact() {
     durationChain();
-    emitByte(OpCode.DIRECTION_REMAINING.index);
+    emitByte(OpCode.directionIn.index);
   }
 
   /// [durationChain] ( ago | remaining )
@@ -103,28 +103,28 @@ class Parser {
   /// [duration] (("," [duration])+ "and" [duration] )?
   void durationChain() {
     duration();
-    if (match(TokenType.COMMA)) {
+    if (match(TokenType.comma)) {
       bool hitAnd = false;
       do {
-        if (match(TokenType.AND)) {
+        if (match(TokenType.keyAnd)) {
           hitAnd = true;
           break;
         }
 
         duration();
-        emitByte(OpCode.ADD.index);
-      } while (match(TokenType.COMMA));
+        emitByte(OpCode.add.index);
+      } while (match(TokenType.comma));
 
-      if (hitAnd || match(TokenType.AND)) {
+      if (hitAnd || match(TokenType.keyAnd)) {
         duration();
-        emitByte(OpCode.ADD.index);
+        emitByte(OpCode.add.index);
       }
     }
   }
 
   /// number [timeframe]
   void duration() {
-    if (match(TokenType.NUMBER)) {
+    if (match(TokenType.number)) {
       emitConstant(Value.number(double.parse(previous.value)));
       timeframe();
     } else {
@@ -135,36 +135,36 @@ class Parser {
   /// 'moment' | 'second' | 'minute' | 'hour' | 'day' | 'week' |
   /// 'month' | 'year' | 'decade'
   void timeframe() {
-    if (match(TokenType.MOMENT)) {
-      emitByte(OpCode.DURATION_MOMENT.index);
-    } else if (match(TokenType.SECOND)) {
-      emitByte(OpCode.DURATION_SECONDS.index);
-    } else if (match(TokenType.MINUTE)) {
-      emitByte(OpCode.DURATION_MINUTES.index);
-    } else if (match(TokenType.HOUR)) {
-      emitByte(OpCode.DURATION_HOURS.index);
-    } else if (match(TokenType.DAY)) {
-      emitByte(OpCode.DURATION_DAYS.index);
-    } else if (match(TokenType.WEEK)) {
+    if (match(TokenType.keyMoment)) {
+      emitByte(OpCode.durationMoment.index);
+    } else if (match(TokenType.keySecond)) {
+      emitByte(OpCode.durationSecond.index);
+    } else if (match(TokenType.keyMinute)) {
+      emitByte(OpCode.durationMinute.index);
+    } else if (match(TokenType.keyHour)) {
+      emitByte(OpCode.durationHour.index);
+    } else if (match(TokenType.keyDay)) {
+      emitByte(OpCode.durationDay.index);
+    } else if (match(TokenType.keyWeek)) {
       emitConstant(Value.number(7));
-      emitByte(OpCode.MULTIPLY.index);
-      emitByte(OpCode.DURATION_DAYS.index);
-    } else if (match(TokenType.MONTH)) {
+      emitByte(OpCode.multiply.index);
+      emitByte(OpCode.durationDay.index);
+    } else if (match(TokenType.keyMonth)) {
       // TODO: add days depending on calender month
       emitConstant(Value.number(30.437)); // Average days per month.
-      emitByte(OpCode.MULTIPLY.index);
-      emitByte(OpCode.DURATION_DAYS.index);
-    } else if (match(TokenType.YEAR)) {
+      emitByte(OpCode.multiply.index);
+      emitByte(OpCode.durationDay.index);
+    } else if (match(TokenType.keyYear)) {
       // TODO: account for leap year.
       emitConstant(Value.number(365.25)); // Average days per year.
-      emitByte(OpCode.MULTIPLY.index);
-      emitByte(OpCode.DURATION_DAYS.index);
-    } else if (match(TokenType.DECADE)) {
+      emitByte(OpCode.multiply.index);
+      emitByte(OpCode.durationDay.index);
+    } else if (match(TokenType.keyDecade)) {
       // TODO: account for leap year.
       final dayCount = (8.0 * 365.0) + (2.0 * 366.0);
       emitConstant(Value.number(dayCount));
-      emitByte(OpCode.MULTIPLY.index);
-      emitByte(OpCode.DURATION_DAYS.index);
+      emitByte(OpCode.multiply.index);
+      emitByte(OpCode.durationDay.index);
     } else {
       errorAtCurrent("Expect a timeframe indicator.");
     }
@@ -172,10 +172,10 @@ class Parser {
 
   /// 'ago' | 'remaining'
   void direction() {
-    if (match(TokenType.AGO)) {
-      emitByte(OpCode.DIRECTION_AGO.index);
-    } else if (match(TokenType.IN)) {
-      emitByte(OpCode.DIRECTION_REMAINING.index);
+    if (match(TokenType.keyAgo)) {
+      emitByte(OpCode.directionAgo.index);
+    } else if (match(TokenType.keyIn)) {
+      emitByte(OpCode.directionIn.index);
     } else {
       error("Expect time direction such as 'ago' or 'remaining'.");
     }
@@ -199,13 +199,13 @@ class Parser {
   }
 
   void emitReturn() {
-    emitByte(OpCode.RETURN.index);
+    emitByte(OpCode.end.index);
   }
 
   // Constants.
 
   void emitConstant(Value value) {
-    emitBytes(OpCode.CONSTANT.index, makeConstant(value));
+    emitBytes(OpCode.constant.index, makeConstant(value));
   }
 
   int makeConstant(Value value) {
@@ -230,9 +230,9 @@ class Parser {
     if (RechronConfig.isDebug) {
       stdout.write('Error');
 
-      if (token.type == TokenType.CT_EOF) {
+      if (token.type == TokenType.eof) {
         stdout.write(' at end');
-      } else if (token.type == TokenType.CT_ERROR) {
+      } else if (token.type == TokenType.error) {
         // Nothing.
       } else {
         stdout.write(" at '${token.value}'");

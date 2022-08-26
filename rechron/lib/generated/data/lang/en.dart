@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
 import 'package:rechron_core/rechron_core.dart' as _i1;
 
 const data = <String, dynamic>{
@@ -23,37 +21,37 @@ const data = <String, dynamic>{
     'the'
   },
   'tokenMap': {
-    'decade': _i1.TokenType.DECADE,
-    'decades': _i1.TokenType.DECADE,
-    'year': _i1.TokenType.YEAR,
-    'yr': _i1.TokenType.YEAR,
-    'years': _i1.TokenType.YEAR,
-    'mo': _i1.TokenType.MONTH,
-    'month': _i1.TokenType.MONTH,
-    'months': _i1.TokenType.MONTH,
-    'week': _i1.TokenType.WEEK,
-    'wk': _i1.TokenType.WEEK,
-    'weeks': _i1.TokenType.WEEK,
-    'day': _i1.TokenType.DAY,
-    'days': _i1.TokenType.DAY,
-    'hour': _i1.TokenType.HOUR,
-    'hr': _i1.TokenType.HOUR,
-    'h': _i1.TokenType.HOUR,
-    'hours': _i1.TokenType.HOUR,
-    'hrs': _i1.TokenType.HOUR,
-    'min': _i1.TokenType.MINUTE,
-    'minute': _i1.TokenType.MINUTE,
-    'm': _i1.TokenType.MINUTE,
-    'minutes': _i1.TokenType.MINUTE,
-    'mins': _i1.TokenType.MINUTE,
-    'sec': _i1.TokenType.SECOND,
-    'second': _i1.TokenType.SECOND,
-    's': _i1.TokenType.SECOND,
-    'seconds': _i1.TokenType.SECOND,
-    'secs': _i1.TokenType.SECOND,
-    'ago': _i1.TokenType.AGO,
-    'in': _i1.TokenType.IN,
-    'from now': _i1.TokenType.IN
+    'decade': _i1.TokenType.keyDecade,
+    'decades': _i1.TokenType.keyDecade,
+    'year': _i1.TokenType.keyYear,
+    'yr': _i1.TokenType.keyYear,
+    'years': _i1.TokenType.keyYear,
+    'mo': _i1.TokenType.keyMonth,
+    'month': _i1.TokenType.keyMonth,
+    'months': _i1.TokenType.keyMonth,
+    'week': _i1.TokenType.keyWeek,
+    'wk': _i1.TokenType.keyWeek,
+    'weeks': _i1.TokenType.keyWeek,
+    'day': _i1.TokenType.keyDay,
+    'days': _i1.TokenType.keyDay,
+    'hour': _i1.TokenType.keyHour,
+    'hr': _i1.TokenType.keyHour,
+    'h': _i1.TokenType.keyHour,
+    'hours': _i1.TokenType.keyHour,
+    'hrs': _i1.TokenType.keyHour,
+    'min': _i1.TokenType.keyMinute,
+    'minute': _i1.TokenType.keyMinute,
+    'm': _i1.TokenType.keyMinute,
+    'minutes': _i1.TokenType.keyMinute,
+    'mins': _i1.TokenType.keyMinute,
+    'sec': _i1.TokenType.keySecond,
+    'second': _i1.TokenType.keySecond,
+    's': _i1.TokenType.keySecond,
+    'seconds': _i1.TokenType.keySecond,
+    'secs': _i1.TokenType.keySecond,
+    'ago': _i1.TokenType.keyAgo,
+    'in': _i1.TokenType.keyIn,
+    'from now': _i1.TokenType.keyIn
   },
   'relativeType': {
     'day before yesterday': '2 day ago',
@@ -121,7 +119,7 @@ const data = <String, dynamic>{
     'en-AT': {'name': 'en-AT'},
     'en-AU': {
       'name': 'en-AU',
-      'tokenMap': {'h': _i1.TokenType.HOUR}
+      'tokenMap': {'h': _i1.TokenType.keyHour}
     },
     'en-BB': {'name': 'en-BB'},
     'en-BE': {'name': 'en-BE'},
@@ -198,7 +196,7 @@ const data = <String, dynamic>{
     'en-SE': {'name': 'en-SE'},
     'en-SG': {
       'name': 'en-SG',
-      'tokenMap': {'mth': _i1.TokenType.MONTH},
+      'tokenMap': {'mth': _i1.TokenType.keyMonth},
       'relativeType': {
         'this mth': '0 month ago',
         'last mth': '1 month ago',

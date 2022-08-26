@@ -1,8 +1,7 @@
-// ignore_for_file: constant_identifier_names
 
 class Token {
   const Token(this.type, this.value, this.line);
-  const Token.empty() : this(TokenType.CT_ERROR, "", 0);
+  const Token.empty() : this(TokenType.error, "", 0);
 
   final int line;
   final TokenType type;
@@ -16,47 +15,49 @@ class Token {
 
 enum TokenType {
   // Single-character tokens.
-  COMMA,
+  comma,
 
-  DECADE, // Timeframe.
-  YEAR,
-  MONTH,
-  WEEK,
-  DAY,
-  HOUR,
-  MINUTE,
-  SECOND,
-  MOMENT,
+  // Timeframe.
+  keyDecade,
+  keyYear,
+  keyMonth,
+  keyWeek,
+  keyDay,
+  keyHour,
+  keyMinute,
+  keySecond,
+  keyMoment,
 
-  AGO, // Relative.
-  IN,
+  // Relative.
+  keyAgo,
+  keyIn,
 
-  AND,
+  keyAnd,
 
   // Literals.
-  NUMBER,
+  number,
 
-  CT_SKIP,
-  CT_ERROR,
-  CT_EOF,
+  skip,
+  error,
+  eof,
 }
 
 const keywords = <String, TokenType>{
   // Timeframes.
-  'decade': TokenType.DECADE,
-  'year': TokenType.YEAR,
-  'month': TokenType.MONTH,
-  'week': TokenType.WEEK,
-  'day': TokenType.DAY,
-  'hour': TokenType.HOUR,
-  'minute': TokenType.MINUTE,
-  'second': TokenType.SECOND,
-  'moment': TokenType.MOMENT,
+  'decade': TokenType.keyDecade,
+  'year': TokenType.keyYear,
+  'month': TokenType.keyMonth,
+  'week': TokenType.keyWeek,
+  'day': TokenType.keyDay,
+  'hour': TokenType.keyHour,
+  'minute': TokenType.keyMinute,
+  'second': TokenType.keySecond,
+  'moment': TokenType.keyMoment,
 
   // Relative.
-  'ago': TokenType.AGO,
-  'in': TokenType.IN,
+  'ago': TokenType.keyAgo,
+  'in': TokenType.keyIn,
 
   // Other.
-  'and': TokenType.AND,
+  'and': TokenType.keyAnd,
 };

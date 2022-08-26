@@ -29,68 +29,69 @@ class VM {
 
       final instruction = read().toCode();
       switch (instruction) {
-        case OpCode.PUSH_DATETIME_NOW:
-          push(Value.dateTime(DateTime.now()));
-          break;
-        case OpCode.INTO_DATE:
-          final dateTime = (pop() as DateTimeValue).value;
-          final date = DateTime(dateTime.year, dateTime.month, dateTime.day);
-          push(Value.dateTime(date));
-          break;
-
-        case OpCode.DURATION_DAYS:
+        case OpCode.durationDay:
           final count = (pop() as NumberValue).value;
           final duration = Duration(days: count.toInt());
           push(Value.duration(duration));
           break;
-        case OpCode.DURATION_HOURS:
+        case OpCode.durationHour:
           final count = (pop() as NumberValue).value;
           final duration = Duration(hours: count.toInt());
           push(Value.duration(duration));
           break;
-        case OpCode.DURATION_MINUTES:
+        case OpCode.durationMinute:
           final count = (pop() as NumberValue).value;
           final duration = Duration(minutes: count.toInt());
           push(Value.duration(duration));
           break;
-        case OpCode.DURATION_SECONDS:
+        case OpCode.durationSecond:
           final count = (pop() as NumberValue).value;
           final duration = Duration(seconds: count.toInt());
           push(Value.duration(duration));
           break;
-        case OpCode.DURATION_MOMENT:
+        case OpCode.durationMoment:
           pop();
           push(Value.duration(Duration()));
           break;
 
-        case OpCode.DIRECTION_AGO:
+        case OpCode.directionAgo:
           final duration = pop() as DurationValue;
           final dateTime = DateTime.now().subtract(duration.value);
           push(Value.dateTime(dateTime));
           break;
-        case OpCode.DIRECTION_REMAINING:
+        case OpCode.directionIn:
           final duration = pop() as DurationValue;
           final dateTime = DateTime.now().add(duration.value);
           push(Value.dateTime(dateTime));
           break;
 
-        case OpCode.CONSTANT:
+        case OpCode.constant:
           final constant = readConstant();
           push(constant);
           break;
 
-        case OpCode.ADD:
+        case OpCode.add:
           final a = pop();
           final b = pop();
-          push(a + b);
+
+          try {
+            push(a + b);
+          } on TypeError {
+            return InterpretResult.runtimeError;
+          }
           break;
-        case OpCode.MULTIPLY:
+        case OpCode.multiply:
           final a = pop();
           final b = pop();
-          push(a * b);
+
+          try {
+            push(a * b);
+          } on TypeError {
+            return InterpretResult.runtimeError;
+          }
           break;
 
-        case OpCode.RETURN:
+        case OpCode.end:
           return InterpretResult.ok;
       }
     }

@@ -14,36 +14,31 @@ int disassembleIntruction(Chunk chunk, int offset) {
 
   final instruction = chunk.code[offset].toCode();
   switch (instruction) {
-    case OpCode.PUSH_DATETIME_NOW:
-      return simpleInstruction('OP_DATETIME_NOW', offset);
-    case OpCode.INTO_DATE:
-      return simpleInstruction('OP_INTO_DATE', offset);
-
-    case OpCode.DURATION_DAYS:
+    case OpCode.durationDay:
       return simpleInstruction('OP_DURATION_DAYS', offset);
-    case OpCode.DURATION_HOURS:
+    case OpCode.durationHour:
       return simpleInstruction('OP_DURATION_HOURS', offset);
-    case OpCode.DURATION_MINUTES:
+    case OpCode.durationMinute:
       return simpleInstruction('OP_DURATION_MINUTES', offset);
-    case OpCode.DURATION_SECONDS:
+    case OpCode.durationSecond:
       return simpleInstruction('OP_DURATION_SECONDS', offset);
-    case OpCode.DURATION_MOMENT:
+    case OpCode.durationMoment:
       return simpleInstruction('OP_DURATION_MOMENT', offset);
 
-    case OpCode.DIRECTION_AGO:
+    case OpCode.directionAgo:
       return simpleInstruction('OP_DIRECTION_AGO', offset);
-    case OpCode.DIRECTION_REMAINING:
+    case OpCode.directionIn:
       return simpleInstruction('OP_DIRECTION_REMAINING', offset);
 
-    case OpCode.CONSTANT:
+    case OpCode.constant:
       return constantInstruction('OP_CONSTANT', chunk, offset);
 
-    case OpCode.ADD:
+    case OpCode.add:
       return simpleInstruction('OP_ADD', offset);
-    case OpCode.MULTIPLY:
+    case OpCode.multiply:
       return simpleInstruction('OP_MULTIPLY', offset);
 
-    case OpCode.RETURN:
+    case OpCode.end:
       return simpleInstruction('OP_RETURN', offset);
 
     default:
