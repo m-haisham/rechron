@@ -6,16 +6,11 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:build/build.dart';
-import 'package:yaml/yaml.dart';
 
 import 'data.dart';
 
 class DataBuilder extends Builder {
-  final String header = '''
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
-// ignore_for_file: no_leading_underscores_for_library_prefixes
-''';
+  final String header = '''// GENERATED CODE - DO NOT MODIFY BY HAND''';
 
   final data = jsonDecode(File('data/data.json').readAsStringSync());
   final formatter = DartFormatter();
