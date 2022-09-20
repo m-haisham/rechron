@@ -60,4 +60,7 @@ const keywords = <String, TokenType>{
 
   // Other.
   'and': TokenType.keyAnd,
+
+  // Single character tokens.
+  ',': TokenType.comma,
 };
