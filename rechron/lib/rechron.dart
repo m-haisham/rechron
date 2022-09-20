@@ -10,7 +10,7 @@ export 'package:rechron_core/rechron_core.dart';
 /// # Warnings
 ///
 /// The function only supports [double], [Duration], or [DateTime] for [T].
-/// Otherwise, it will throw always throw [UnexpectedResultException]
+/// Otherwise, it will always throw [UnexpectedResultException]
 T parse<T>(String source, {LocaleData? locale}) {
   final data = locale ?? GeneratedData('en');
   source = data.preprocess(source);

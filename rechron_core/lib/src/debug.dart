@@ -37,6 +37,8 @@ int disassembleIntruction(Chunk chunk, int offset) {
       return simpleInstruction('OP_ADD', offset);
     case OpCode.multiply:
       return simpleInstruction('OP_MULTIPLY', offset);
+    case OpCode.subtract:
+      return simpleInstruction('OP_SUBTRACT', offset);
 
     case OpCode.end:
       return simpleInstruction('OP_RETURN', offset);

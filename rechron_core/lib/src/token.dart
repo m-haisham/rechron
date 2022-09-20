@@ -1,4 +1,3 @@
-
 class Token {
   const Token(this.type, this.value, this.line);
   const Token.empty() : this(TokenType.error, "", 0);
@@ -16,6 +15,8 @@ class Token {
 enum TokenType {
   // Single-character tokens.
   comma,
+  plus,
+  minus,
 
   // Timeframe.
   keyDecade,
@@ -58,4 +59,6 @@ const keywords = <String, TokenType>{
 
   // Single character tokens.
   ',': TokenType.comma,
+  '+': TokenType.plus,
+  '-': TokenType.minus,
 };

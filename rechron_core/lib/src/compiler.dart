@@ -77,6 +77,13 @@ class Parser {
   /// [value]
   void expression() {
     value();
+    if (match(TokenType.plus)) {
+      expression();
+      emitByte(OpCode.add.index);
+    } else if (match(TokenType.minus)) {
+      expression();
+      emitByte(OpCode.subtract.index);
+    }
   }
 
   /// [prefix] | [postfix]

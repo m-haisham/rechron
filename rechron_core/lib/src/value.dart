@@ -30,10 +30,34 @@ class Value<T> {
   }
 
   Value operator +(Value other) {
-    if (this is DurationValue && other is DurationValue) {
-      final current = this as DurationValue;
-      final value = current.value + other.value;
-      return Value.duration(value);
+    if (this is DurationValue) {
+      if (other is DurationValue) {
+        final duration = (this as DurationValue).value + other.value;
+        return Value<Duration>._(duration);
+      } else if (other is DateTimeValue) {
+        final dateTime = other.value.add((this as DurationValue).value);
+        return Value<DateTime>._(dateTime);
+      }
+    } else if (this is DateTimeValue && other is DurationValue) {
+      final dateTime = (this as DateTimeValue).value.add(other.value);
+      return Value<DateTime>._(dateTime);
+    }
+
+    throw TypeError();
+  }
+
+  Value operator -(Value other) {
+    if (this is DurationValue) {
+      if (other is DurationValue) {
+        final duration = (this as DurationValue).value - other.value;
+        return Value<Duration>._(duration);
+      } else if (other is DateTimeValue) {
+        final dateTime = other.value.subtract((this as DurationValue).value);
+        return Value<DateTime>._(dateTime);
+      }
+    } else if (this is DateTimeValue && other is DurationValue) {
+      final dateTime = (this as DateTimeValue).value.subtract(other.value);
+      return Value<DateTime>._(dateTime);
     }
 
     throw TypeError();
