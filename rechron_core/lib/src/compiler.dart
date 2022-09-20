@@ -74,28 +74,28 @@ class Parser {
 
   // Expressions.
 
-  /// [relative]
+  /// [value]
   void expression() {
-    relative();
+    value();
   }
 
-  /// [inExact] | [exact]
-  void relative() {
+  /// [prefix] | [postfix]
+  void value() {
     if (match(TokenType.keyIn)) {
-      inExact();
+      prefix();
     } else {
-      exact();
+      postfix();
     }
   }
 
   /// 'in' [durationChain]
-  void inExact() {
+  void prefix() {
     durationChain();
     emitByte(OpCode.directionIn.index);
   }
 
-  /// [durationChain] ( ago | remaining )
-  void exact() {
+  /// [durationChain] ( ago | remaining )?
+  void postfix() {
     durationChain();
     direction();
   }
@@ -163,8 +163,6 @@ class Parser {
       emitByte(OpCode.directionAgo.index);
     } else if (match(TokenType.keyIn)) {
       emitByte(OpCode.directionIn.index);
-    } else {
-      error("Expect time direction such as 'ago' or 'remaining'.");
     }
   }
 

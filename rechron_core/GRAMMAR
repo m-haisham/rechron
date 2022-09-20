@@ -1,11 +1,9 @@
-expression       => date_time
-date_time        => relative
+expression       => value
+value            => prefix
+                  | postfix
 
-relative         => in_exact
-                  | exact
-
-in_exact         => "in" duration_chain
-exact            => duration_chain direction
+prefix           => "in" duration_chain
+postfix          => duration_chain direction?
 
 duration_chain   => duration (","? duration)*
 duration         => NUMBER timeframe
