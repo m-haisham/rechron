@@ -135,9 +135,7 @@ class Parser {
   /// 'moment' | 'second' | 'minute' | 'hour' | 'day' | 'week' |
   /// 'month' | 'year' | 'decade'
   void timeframe() {
-    if (match(TokenType.keyMoment)) {
-      emitByte(OpCode.durationMoment.index);
-    } else if (match(TokenType.keySecond)) {
+    if (match(TokenType.keySecond)) {
       emitByte(OpCode.durationSecond.index);
     } else if (match(TokenType.keyMinute)) {
       emitByte(OpCode.durationMinute.index);

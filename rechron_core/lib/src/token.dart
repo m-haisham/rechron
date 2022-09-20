@@ -1,4 +1,3 @@
-
 class Token {
   const Token(this.type, this.value, this.line);
   const Token.empty() : this(TokenType.error, "", 0);
@@ -26,7 +25,6 @@ enum TokenType {
   keyHour,
   keyMinute,
   keySecond,
-  keyMoment,
 
   // Relative.
   keyAgo,
@@ -52,7 +50,6 @@ const keywords = <String, TokenType>{
   'hour': TokenType.keyHour,
   'minute': TokenType.keyMinute,
   'second': TokenType.keySecond,
-  'moment': TokenType.keyMoment,
 
   // Relative.
   'ago': TokenType.keyAgo,
