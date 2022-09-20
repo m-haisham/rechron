@@ -1,6 +1,6 @@
 name: rechron_dev
 description: This library contains generators used in rechron.
-version: 0.1.1-dev.1
+version: 0.2.0
 repository: https://github.com/mensch272/rechron
 
 publish_to: none

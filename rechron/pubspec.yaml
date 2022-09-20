@@ -1,6 +1,6 @@
 name: rechron
 description: Dart library for parsing relative date and time.
-version: 0.1.1-dev.1
+version: 0.2.0
 repository: https://github.com/mensch272/rechron
 
 environment:
@@ -8,7 +8,7 @@ environment:
 
 dependencies: 
   benchmark_harness: ^2.1.0
-  rechron_core: ^0.1.1-dev.1
+  rechron_core: ^0.2.0
 
 dependency_overrides:
   rechron_core:
