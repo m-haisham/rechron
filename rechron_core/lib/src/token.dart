@@ -32,8 +32,6 @@ enum TokenType {
   keyAgo,
   keyIn,
 
-  keyAnd,
-
   // Literals.
   number,
 
@@ -57,9 +55,6 @@ const keywords = <String, TokenType>{
   // Relative.
   'ago': TokenType.keyAgo,
   'in': TokenType.keyIn,
-
-  // Other.
-  'and': TokenType.keyAnd,
 
   // Single character tokens.
   ',': TokenType.comma,
