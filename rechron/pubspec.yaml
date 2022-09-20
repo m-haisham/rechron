@@ -12,7 +12,7 @@ dependencies:
 
 dependency_overrides:
   rechron_core:
-    path: ../rechron_dev
+    path: ../rechron_core
 
 dev_dependencies:
   lints: ^2.0.0
