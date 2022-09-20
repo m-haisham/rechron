@@ -1,9 +1,17 @@
+/// Represents a token returned by the scanner
 class Token {
   const Token(this.type, this.value, this.line);
+
+  /// An empty token
   const Token.empty() : this(TokenType.error, "", 0);
 
+  /// The line where the token was read from.
   final int line;
+
+  /// The type of token.
   final TokenType type;
+
+  /// The value of the extracted from the source.
   final String value;
 
   @override
@@ -12,6 +20,7 @@ class Token {
   }
 }
 
+/// The token types supported by scanner.
 enum TokenType {
   // Single-character tokens.
   comma,
@@ -41,6 +50,7 @@ enum TokenType {
   eof,
 }
 
+/// The base keywords that are recognized by the scanner.
 const keywords = <String, TokenType>{
   // Timeframes.
   'decade': TokenType.keyDecade,
