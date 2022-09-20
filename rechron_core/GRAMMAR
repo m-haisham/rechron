@@ -1,4 +1,4 @@
-expression       => value ( ("+" | "-") value )?
+expression       => value ( ("+" | "-") expression )?
 value            => prefix
                   | postfix
 
