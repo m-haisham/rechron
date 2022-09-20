@@ -128,11 +128,11 @@ class Parser {
       emitConstant(Value.number(double.parse(previous.value)));
       timeframe();
     } else {
-      errorAtCurrent("Expect a number or 'a'.");
+      errorAtCurrent("Expect a positive number.");
     }
   }
 
-  /// 'moment' | 'second' | 'minute' | 'hour' | 'day' | 'week' |
+  /// 'second' | 'minute' | 'hour' | 'day' | 'week' |
   /// 'month' | 'year' | 'decade'
   void timeframe() {
     if (match(TokenType.keySecond)) {
