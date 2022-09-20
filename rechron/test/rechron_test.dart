@@ -23,7 +23,7 @@ void langEn() {
 
   for (var testCase in cases.entries) {
     test(testCase.key, () {
-      final parsed = parse(testCase.key).millisecondsSinceEpoch;
+      final parsed = parse<DateTime>(testCase.key).millisecondsSinceEpoch;
       expect(
         testCase.value().millisecondsSinceEpoch,
         closeTo(parsed, 1000),

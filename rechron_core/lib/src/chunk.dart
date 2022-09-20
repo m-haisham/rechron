@@ -1,4 +1,3 @@
-
 import 'package:rechron_core/src/value.dart';
 
 enum OpCode {
@@ -15,6 +14,7 @@ enum OpCode {
 
   add,
   multiply,
+  subtract,
 
   end;
 

@@ -1,29 +1,17 @@
-expression       => relative
-relative         => "just" "now"
-                    | relativeday
+expression       => value ( ("+" | "-") value )?
+value            => prefix
+                  | postfix
 
-relativeday      => "yesterday" | "today" | "tomorrow"
-                    | in_exact
-                    | exact
+prefix           => "in" duration_chain
+postfix          => duration_chain direction?
 
-in_exact         => "in" duration_chain
-exact            => duration_chain direction
-duration_chain   => duration (("," duration)+ "and" duration )?
-duration         => (NUMBER | "a" | "an") timeframe
-timeframe        => month
-                    | week
-                    | day
-                    | hour
-                    | minute
-                    | second
-                    | moment
+duration_chain   => duration (","? duration)*
+duration         => NUMBER timeframe
+timeframe        => "second"
+                  | "minute"
+                  | "hour"
+                  | "day"
+                  | "week"
+                  | "month"
 
 direction        => "ago" | "remaining"
-
-month            => "month" | "months"
-week             => "week" | "weeks"
-day              => "day" | "days"
-hour             => "hour" | "hours"
-minute           => "minute" | "minutes"
-second           => "second" | "seconds"
-moment           => "moment"

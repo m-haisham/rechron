@@ -1,6 +1,5 @@
 import 'package:characters/characters.dart';
 import 'package:rechron_core/rechron_core.dart';
-import 'package:rechron_core/src/lang_data.dart';
 
 class Scanner {
   Scanner(String content, {required this.data})
@@ -25,6 +24,10 @@ class Scanner {
     switch (c) {
       case ",":
         return makeToken(TokenType.comma);
+      case "+":
+        return makeToken(TokenType.plus);
+      case "-":
+        return makeToken(TokenType.minus);
       default:
         if (isDigit(c)) {
           return number();
@@ -34,7 +37,7 @@ class Scanner {
     }
   }
 
-  bool get isAtEnd => current == characters.length;
+  bool get isAtEnd => current >= characters.length;
 
   String peek() {
     return characters[current];
@@ -110,7 +113,7 @@ class Scanner {
   Token identifier() {
     while (!isAtEnd) {
       final c = peek();
-      if (isDigit(c) || isWhitespace(c) || c == ',') {
+      if (isDigit(c) || isWhitespace(c) || c == ',' || c == '+' || c == '-') {
         break;
       }
 

@@ -1,1 +1,1 @@
-library rechron_generators;
+library rechron_dev;

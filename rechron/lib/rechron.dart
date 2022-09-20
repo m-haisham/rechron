@@ -5,7 +5,13 @@ import 'package:rechron_core/rechron_core.dart';
 
 export 'package:rechron_core/rechron_core.dart';
 
-DateTime parse(String source, {LocaleData? locale}) {
+/// Parse a duration or datetime from a human readable string.
+///
+/// # Warnings
+///
+/// The function only supports [double], [Duration], or [DateTime] for [T].
+/// Otherwise, it will always throw [UnexpectedResultException]
+T parse<T>(String source, {LocaleData? locale}) {
   final data = locale ?? GeneratedData('en');
   source = data.preprocess(source);
 
@@ -26,7 +32,7 @@ DateTime parse(String source, {LocaleData? locale}) {
   }
 
   final value = vm.stack.removeLast();
-  if (value is! DateTimeValue) {
+  if (value is! Value<T>) {
     throw UnexpectedResultException();
   }
 

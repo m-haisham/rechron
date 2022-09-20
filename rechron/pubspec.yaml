@@ -8,6 +8,9 @@ environment:
 
 dependencies: 
   benchmark_harness: ^2.1.0
+  rechron_core: ^0.1.1-dev.1
+
+dependency_overrides:
   rechron_core:
     path: ../rechron_core
 

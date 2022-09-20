@@ -31,8 +31,10 @@ const data = <String, dynamic>{
     'months': _i1.TokenType.keyMonth,
     'week': _i1.TokenType.keyWeek,
     'wk': _i1.TokenType.keyWeek,
+    'w': _i1.TokenType.keyWeek,
     'weeks': _i1.TokenType.keyWeek,
     'day': _i1.TokenType.keyDay,
+    'd': _i1.TokenType.keyDay,
     'days': _i1.TokenType.keyDay,
     'hour': _i1.TokenType.keyHour,
     'hr': _i1.TokenType.keyHour,
@@ -51,7 +53,7 @@ const data = <String, dynamic>{
     'secs': _i1.TokenType.keySecond,
     'ago': _i1.TokenType.keyAgo,
     'in': _i1.TokenType.keyIn,
-    'from now': _i1.TokenType.keyIn
+    'from': _i1.TokenType.plus
   },
   'relativeType': {
     'day before yesterday': '2 day ago',
@@ -106,7 +108,6 @@ const data = <String, dynamic>{
   'simplificationsRegex': {
     r'less than 1 minute ago': r'45 second ago',
     r'(\d+)h(\d+)m?': r'\1:\2',
-    r'(?<=from\s+)now': r'in',
     r'(?:12\s+)?noon': r'12:00',
     r'(?:12\s+)?midnight': r'00:00'
   },

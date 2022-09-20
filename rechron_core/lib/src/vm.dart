@@ -71,8 +71,8 @@ class VM {
           break;
 
         case OpCode.add:
-          final a = pop();
           final b = pop();
+          final a = pop();
 
           try {
             push(a + b);
@@ -81,11 +81,21 @@ class VM {
           }
           break;
         case OpCode.multiply:
-          final a = pop();
           final b = pop();
+          final a = pop();
 
           try {
             push(a * b);
+          } on TypeError {
+            return InterpretResult.runtimeError;
+          }
+          break;
+        case OpCode.subtract:
+          final b = pop();
+          final a = pop();
+
+          try {
+            push(a - b);
           } on TypeError {
             return InterpretResult.runtimeError;
           }

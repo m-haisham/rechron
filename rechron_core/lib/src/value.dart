@@ -1,9 +1,15 @@
-abstract class Value {
-  const Value();
+typedef NumberValue = Value<double>;
+typedef DurationValue = Value<Duration>;
+typedef DateTimeValue = Value<DateTime>;
 
-  factory Value.number(double value) = NumberValue;
-  factory Value.duration(Duration duration) = DurationValue;
-  factory Value.dateTime(DateTime dateTime) = DateTimeValue;
+class Value<T> {
+  const Value._(this.value);
+
+  final T value;
+
+  static NumberValue number(double value) => Value._(value);
+  static DurationValue duration(Duration duration) => Value._(duration);
+  static DateTimeValue dateTime(DateTime dateTime) => Value._(dateTime);
 
   Value operator *(Value other) {
     if (this is NumberValue) {
@@ -24,35 +30,38 @@ abstract class Value {
   }
 
   Value operator +(Value other) {
-    if (this is DurationValue && other is DurationValue) {
-      final current = this as DurationValue;
-      final value = current.value + other.value;
-      return Value.duration(value);
+    if (this is DurationValue) {
+      if (other is DurationValue) {
+        final duration = (this as DurationValue).value + other.value;
+        return Value<Duration>._(duration);
+      } else if (other is DateTimeValue) {
+        final dateTime = other.value.add((this as DurationValue).value);
+        return Value<DateTime>._(dateTime);
+      }
+    } else if (this is DateTimeValue && other is DurationValue) {
+      final dateTime = (this as DateTimeValue).value.add(other.value);
+      return Value<DateTime>._(dateTime);
     }
 
     throw TypeError();
   }
-}
 
-class NumberValue extends Value {
-  const NumberValue(this.value);
-  final double value;
+  Value operator -(Value other) {
+    if (this is DurationValue) {
+      if (other is DurationValue) {
+        final duration = (this as DurationValue).value - other.value;
+        return Value<Duration>._(duration);
+      } else if (other is DateTimeValue) {
+        final dateTime = other.value.subtract((this as DurationValue).value);
+        return Value<DateTime>._(dateTime);
+      }
+    } else if (this is DateTimeValue && other is DurationValue) {
+      final dateTime = (this as DateTimeValue).value.subtract(other.value);
+      return Value<DateTime>._(dateTime);
+    }
 
-  @override
-  String toString() => value.toString();
-}
-
-class DurationValue extends Value {
-  const DurationValue(this.value);
-  final Duration value;
-
-  @override
-  String toString() => value.toString();
-}
-
-class DateTimeValue extends Value {
-  const DateTimeValue(this.value);
-  final DateTime value;
+    throw TypeError();
+  }
 
   @override
   String toString() => value.toString();

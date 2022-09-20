@@ -74,51 +74,45 @@ class Parser {
 
   // Expressions.
 
-  /// [relative]
+  /// [value]
   void expression() {
-    relative();
+    value();
+    if (match(TokenType.plus)) {
+      expression();
+      emitByte(OpCode.add.index);
+    } else if (match(TokenType.minus)) {
+      expression();
+      emitByte(OpCode.subtract.index);
+    }
   }
 
-  /// [inExact] | [exact]
-  void relative() {
+  /// [prefix] | [postfix]
+  void value() {
     if (match(TokenType.keyIn)) {
-      inExact();
+      prefix();
     } else {
-      exact();
+      postfix();
     }
   }
 
   /// 'in' [durationChain]
-  void inExact() {
+  void prefix() {
     durationChain();
     emitByte(OpCode.directionIn.index);
   }
 
-  /// [durationChain] ( ago | remaining )
-  void exact() {
+  /// [durationChain] ( ago | remaining )?
+  void postfix() {
     durationChain();
     direction();
   }
 
-  /// [duration] (("," [duration])+ "and" [duration] )?
+  /// [duration] [duration]*
   void durationChain() {
     duration();
-    if (match(TokenType.comma)) {
-      bool hitAnd = false;
-      do {
-        if (match(TokenType.keyAnd)) {
-          hitAnd = true;
-          break;
-        }
-
-        duration();
-        emitByte(OpCode.add.index);
-      } while (match(TokenType.comma));
-
-      if (hitAnd || match(TokenType.keyAnd)) {
-        duration();
-        emitByte(OpCode.add.index);
-      }
+    if (match(TokenType.comma) | check(TokenType.number)) {
+      duration();
+      emitByte(OpCode.add.index);
     }
   }
 
@@ -128,11 +122,11 @@ class Parser {
       emitConstant(Value.number(double.parse(previous.value)));
       timeframe();
     } else {
-      errorAtCurrent("Expect a number or 'a'.");
+      errorAtCurrent("Expect a positive number.");
     }
   }
 
-  /// 'moment' | 'second' | 'minute' | 'hour' | 'day' | 'week' |
+  /// 'second' | 'minute' | 'hour' | 'day' | 'week' |
   /// 'month' | 'year' | 'decade'
   void timeframe() {
     if (match(TokenType.keyMoment)) {
@@ -176,8 +170,6 @@ class Parser {
       emitByte(OpCode.directionAgo.index);
     } else if (match(TokenType.keyIn)) {
       emitByte(OpCode.directionIn.index);
-    } else {
-      error("Expect time direction such as 'ago' or 'remaining'.");
     }
   }
 
