@@ -4,9 +4,14 @@ Dart library for parsing relative date and time.
 
 ## Installation
 
-```yaml
-dependencies:
-  rechron: ^0.1.0
+```bash
+dart pub add rechron
+```
+
+Or, with flutter
+
+```bash
+flutter pub add rechron
 ```
 
 ## Usage
