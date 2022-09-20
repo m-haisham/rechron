@@ -1,6 +1,5 @@
 import 'package:characters/characters.dart';
 import 'package:rechron_core/rechron_core.dart';
-import 'package:rechron_core/src/lang_data.dart';
 
 class Scanner {
   Scanner(String content, {required this.data})
