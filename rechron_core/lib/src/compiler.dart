@@ -100,25 +100,12 @@ class Parser {
     direction();
   }
 
-  /// [duration] (("," [duration])+ "and" [duration] )?
+  /// [duration] [duration]*
   void durationChain() {
     duration();
-    if (match(TokenType.comma)) {
-      bool hitAnd = false;
-      do {
-        if (match(TokenType.keyAnd)) {
-          hitAnd = true;
-          break;
-        }
-
-        duration();
-        emitByte(OpCode.add.index);
-      } while (match(TokenType.comma));
-
-      if (hitAnd || match(TokenType.keyAnd)) {
-        duration();
-        emitByte(OpCode.add.index);
-      }
+    if (match(TokenType.comma) | check(TokenType.number)) {
+      duration();
+      emitByte(OpCode.add.index);
     }
   }
 

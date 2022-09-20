@@ -7,7 +7,7 @@ relative         => in_exact
 in_exact         => "in" duration_chain
 exact            => duration_chain direction
 
-duration_chain   => duration (("," duration)+ "and" duration )?
+duration_chain   => duration (","? duration)*
 duration         => NUMBER timeframe
 timeframe        => "second"
                   | "minute"
