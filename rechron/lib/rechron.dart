@@ -5,7 +5,7 @@ import 'package:rechron_core/rechron_core.dart';
 
 export 'package:rechron_core/rechron_core.dart';
 
-/// Parse a duration or datetime from a human readable string.
+/// Parse a duration or datetime from a human readable date string.
 ///
 /// # Warnings
 ///
@@ -37,4 +37,18 @@ T parse<T>(String source, {LocaleData? locale}) {
   }
 
   return value.value;
+}
+
+/// Try to parse a human readable date string and return null when failed.
+///
+/// # Warnings
+///
+/// All the same warnings from [parse] apply to this function. But instead of
+/// [UnexpectedResultException], [null] is return
+T? tryParse<T>(String source, {LocaleData? locale}) {
+  try {
+    return parse(source);
+  } on RechronException {
+    return null;
+  }
 }
