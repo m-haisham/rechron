@@ -8,7 +8,7 @@ abstract class Debugger {
   int disassembleIntruction(Chunk chunk, int offset);
 }
 
-abstract class WriteDebugger extends Debugger {
+abstract class WriterDebugger extends Debugger {
   /// Write the given [value]
   void write(Object value);
 

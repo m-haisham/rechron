@@ -7,7 +7,7 @@ class IoReporter extends WriterReporter {
   void write(Object value) => stdout.write(value);
 }
 
-class IoDebugger extends WriteDebugger {
+class IoDebugger extends WriterDebugger {
   @override
   void write(Object value) => stdout.write(value);
 }
