@@ -20,7 +20,7 @@ class VM {
   InterpretResult run() {
     while (true) {
       reporter?.stack(stack);
-      debugger?.disassembleIntruction(chunk, ip);
+      debugger?.instruction(chunk, ip);
 
       final instruction = read().toCode();
       switch (instruction) {

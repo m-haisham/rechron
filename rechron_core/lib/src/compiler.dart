@@ -71,7 +71,7 @@ class Parser {
     emitReturn();
 
     if (!hadError) {
-      debugger?.disassembleChunk(chunk, 'code');
+      debugger?.chunk(chunk, 'code');
     }
   }
 

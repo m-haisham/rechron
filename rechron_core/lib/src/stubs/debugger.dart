@@ -2,10 +2,10 @@ import 'package:rechron_core/rechron_core.dart';
 
 abstract class Debugger {
   /// Disassemble the byte code of the chunk in a readable way
-  void disassembleChunk(Chunk chunk, String name);
+  void chunk(Chunk chunk, String name);
 
-  /// Disasseble the instruction and dependant constant values.
-  int disassembleIntruction(Chunk chunk, int offset);
+  /// Disassemble the instruction and dependant constant values.
+  int instruction(Chunk chunk, int offset);
 }
 
 abstract class WriterDebugger extends Debugger {
@@ -14,16 +14,16 @@ abstract class WriterDebugger extends Debugger {
 
   /// Disassemble the byte code of the chunk in a readable way
   @override
-  void disassembleChunk(Chunk chunk, String name) {
+  void chunk(Chunk chunk, String name) {
     write("== $name ==\n");
     for (var offset = 0; offset < chunk.code.length;) {
-      offset = disassembleIntruction(chunk, offset);
+      offset = instruction(chunk, offset);
     }
   }
 
-  /// Disasseble the instruction and dependant constant values.
+  /// Disassemble the instruction and dependant constant values.
   @override
-  int disassembleIntruction(Chunk chunk, int offset) {
+  int instruction(Chunk chunk, int offset) {
     write('${offset.toString().padLeft(4, "0")} ');
 
     final instruction = chunk.code[offset].toCode();
