@@ -19,6 +19,12 @@ void langEn() {
     'in 25 seconds': () => DateTime.now().add(Duration(seconds: 25)),
     'in 25 seconds, 6 weeks': () =>
         DateTime.now().add(Duration(days: 6 * 7, seconds: 25)),
+    'in 25 seconds 6 weeks': () =>
+        DateTime.now().add(Duration(days: 6 * 7, seconds: 25)),
+    '2 minutes from 2 minutes ago': () => DateTime.now(),
+    '1 minute ago + 2 minutes': () => DateTime.now().add(Duration(minutes: 1)),
+    '2 minutes - 1 minute ago': () =>
+        DateTime.now().subtract(Duration(minutes: 3)),
   };
 
   for (var testCase in cases.entries) {
