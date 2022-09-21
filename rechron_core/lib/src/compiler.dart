@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:rechron_core/rechron_core.dart';
 
 class Parser {
@@ -7,11 +5,16 @@ class Parser {
     this.source,
     this.chunk, {
     required this.data,
+    this.reporter,
+    this.debugger,
   }) : scanner = Scanner(source, data: data);
 
   final String source;
   final Chunk chunk;
   final Scanner scanner;
+
+  final Reporter? reporter;
+  final Debugger? debugger;
 
   final LocaleData data;
 
@@ -67,8 +70,8 @@ class Parser {
   void endCompiler() {
     emitReturn();
 
-    if (RechronConfig.isDebug && !hadError) {
-      disassembleChunk(chunk, 'code');
+    if (!hadError) {
+      debugger?.disassembleChunk(chunk, 'code');
     }
   }
 
@@ -215,24 +218,11 @@ class Parser {
     errorAt(previous, message);
   }
 
-  void errorAt(Token token, message) {
+  void errorAt(Token token, String message) {
     if (panicMode) return;
     panicMode = true;
 
-    if (RechronConfig.isDebug) {
-      stdout.write('Error');
-
-      if (token.type == TokenType.eof) {
-        stdout.write(' at end');
-      } else if (token.type == TokenType.error) {
-        // Nothing.
-      } else {
-        stdout.write(" at '${token.value}'");
-      }
-
-      stdout.write(": $message\n");
-    }
-
+    reporter?.errorAt(token, message);
     hadError = true;
   }
 }

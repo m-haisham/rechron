@@ -11,17 +11,34 @@ export 'package:rechron_core/rechron_core.dart';
 ///
 /// The function only supports [double], [Duration], or [DateTime] for [T].
 /// Otherwise, it will always throw [UnexpectedResultException]
-T parse<T>(String source, {LocaleData? locale}) {
+T parse<T>(
+  String source, {
+  LocaleData? locale,
+  Reporter? reporter,
+  Debugger? debugger,
+}) {
   final data = locale ?? GeneratedData('en');
   source = data.preprocess(source);
 
   final chunk = Chunk();
-  final parser = Parser(source, chunk, data: data);
+  final parser = Parser(
+    source,
+    chunk,
+    data: data,
+    reporter: reporter,
+    debugger: debugger,
+  );
+
   if (!parser.compile()) {
     throw CompileException();
   }
 
-  final vm = VM(chunk);
+  final vm = VM(
+    chunk,
+    reporter: reporter,
+    debugger: debugger,
+  );
+
   final result = vm.run();
   switch (result) {
     case InterpretResult.ok:
@@ -45,9 +62,19 @@ T parse<T>(String source, {LocaleData? locale}) {
 ///
 /// All the same warnings from [parse] apply to this function. But instead of
 /// [UnexpectedResultException], [null] is return
-T? tryParse<T>(String source, {LocaleData? locale}) {
+T? tryParse<T>(
+  String source, {
+  LocaleData? locale,
+  Reporter? reporter,
+  Debugger? debugger,
+}) {
   try {
-    return parse(source);
+    return parse(
+      source,
+      locale: locale,
+      reporter: reporter,
+      debugger: debugger,
+    );
   } on RechronException {
     return null;
   }

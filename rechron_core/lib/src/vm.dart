@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:rechron_core/rechron_core.dart';
 
 enum InterpretResult {
@@ -9,7 +7,10 @@ enum InterpretResult {
 }
 
 class VM {
-  VM(this.chunk);
+  VM(this.chunk, {this.reporter, this.debugger});
+
+  final Reporter? reporter;
+  final Debugger? debugger;
 
   final Chunk chunk;
   final List<Value> stack = [];
@@ -18,14 +19,8 @@ class VM {
 
   InterpretResult run() {
     while (true) {
-      if (RechronConfig.isDebug) {
-        stdout.write('     ');
-        for (final value in stack.reversed) {
-          stdout.write('[$value]');
-        }
-        stdout.write('\n');
-        disassembleIntruction(chunk, ip);
-      }
+      reporter?.stack(stack);
+      debugger?.disassembleIntruction(chunk, ip);
 
       final instruction = read().toCode();
       switch (instruction) {

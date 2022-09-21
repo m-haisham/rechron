@@ -1,9 +1,23 @@
+import 'dart:io';
+
 import 'package:rechron/rechron.dart';
 
-void main(List<String> args) {
-  RechronConfig.isDebug = true;
+class IoReporter extends WriterReporter {
+  @override
+  void write(Object value) => stdout.write(value);
+}
 
+class IoDebugger extends WriteDebugger {
+  @override
+  void write(Object value) => stdout.write(value);
+}
+
+void main(List<String> args) {
   final source = args.isNotEmpty ? args.first : 'day before yesterday';
-  final dateTime = parse(source);
+  final dateTime = parse(
+    source,
+    reporter: IoReporter(),
+    debugger: IoDebugger(),
+  );
   print(dateTime);
 }
