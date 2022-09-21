@@ -7,6 +7,10 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Removed use of `dart:io` and extracted reporter and debugger functionality.
+
 ## [0.2.0]
 
 ### Added
