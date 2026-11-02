@@ -4,7 +4,31 @@ import 'package:rechron/rechron.dart';
 void main() {
   group("parse", () {
     group("en", langEn);
+    group("invalid", invalid);
   });
+}
+
+void invalid() {
+  // Each case has a '+' or '-' where a number or timeframe is expected. The
+  // parser must report a compile error, not keep matching the sign after the
+  // error and recurse until the stack overflows.
+  final cases = [
+    '2026-10-26 00:00',
+    '2026-10-26',
+    '+',
+    '-',
+    '5 minutes +',
+    '5 minutes ago -',
+    '5 -',
+    '1 minute ago + - 2 minutes',
+  ];
+
+  for (var source in cases) {
+    test(source, () {
+      expect(() => parse<DateTime>(source), throwsA(isA<CompileException>()));
+      expect(tryParse<DateTime>(source), isNull);
+    });
+  }
 }
 
 void langEn() {
