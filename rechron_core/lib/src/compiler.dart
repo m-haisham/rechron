@@ -63,8 +63,13 @@ class Parser {
     return true;
   }
 
+  /// Whether [current] is of [type].
+  ///
+  /// Always false once an error has been reported: [advance] no longer
+  /// consumes tokens then, so matching [current] again would not make
+  /// progress and a recursive rule such as [expression] would never return.
   bool check(TokenType type) {
-    return current.type == type;
+    return !hadError && current.type == type;
   }
 
   void endCompiler() {

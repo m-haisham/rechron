@@ -11,6 +11,12 @@ and this project adheres to Semantic Versioning.
 
 - Removed use of `dart:io` and extracted reporter and debugger functionality.
 
+### Fixes
+
+- Fixed stack overflow when a `+` or `-` appears where a number or timeframe
+  is expected (such as `2026-10-26 00:00`). Parsing now stops at the first
+  error and throws `CompileException`.
+
 ## [0.2.0]
 
 ### Added
